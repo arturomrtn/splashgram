@@ -34,4 +34,5 @@ const albumSchema = new Schema(
 
 albumSchema.plugin(require('mongoose-autopopulate'));
 
-export default mongoose.model('Album', albumSchema);
+const Album = mongoose.model('Album', albumSchema)
+module.exports = Album

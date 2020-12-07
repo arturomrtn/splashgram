@@ -37,4 +37,5 @@ const imageSchema = new Schema(
 
 imageSchema.plugin(require('mongoose-autopopulate'));
 
-export default mongoose.model('Image', imageSchema);
+const Image = mongoose.model('Image', imageSchema)
+module.exports = Image
