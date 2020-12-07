@@ -1,1 +1,1 @@
-# SplashGram-
+# SplashGram
