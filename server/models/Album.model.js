@@ -18,13 +18,13 @@ const albumSchema = new Schema(
 			trim: true,
 		},
 		images: [
+
 			{
-				imageId: {
-					type: Schema.Types.ObjectId,
-					ref: 'Image',
-					autopopulate: true,
-				},
+				type: Schema.Types.ObjectId,
+				ref: 'Image',
+				autopopulate: true,
 			},
+
 		],
 	},
 	{

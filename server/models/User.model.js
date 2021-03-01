@@ -35,10 +35,17 @@ const userSchema = new Schema(
 			trim: true,
 		},
 		interestedIn: {
-			type: [''],
+			type: [String] ,
 			required: true,
 		},
 		avatar: String,
+		comments: [
+			{
+				type: Schema.Types.ObjectId,
+				ref: 'Comment',
+				autopopulate: true,
+			},
+		],
 	},
 	{
 		timestamps: true,

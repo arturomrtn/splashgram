@@ -16,6 +16,6 @@ require('./configs/middleware.config')(app)
 require('./configs/passport.config')(app)
 
 // Routes index
-//require('./routes')(app)
+require('./routes')(app)
 
 module.exports = app

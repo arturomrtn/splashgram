@@ -4,8 +4,6 @@ const passport = require("passport")
 const bcrypt = require("bcrypt")
 
 const User = require("../models/user.model")
-const Album = require("../models/Album.model")
-const Album = require("../models/Album.model")
 
 router.post('/register', (req, res) =>{
     const {username, password} = req.body
@@ -40,7 +38,6 @@ router.post('/register', (req, res) =>{
 
 router.post('/login', (req, res, next) => {
 
-    //FIXME: revisar que data del usuario es la que viene del front y se almacena en 'theUser'
     passport.authenticate('local', (err, theUser, failureDetails) => {
 
         if (err) {
@@ -56,16 +53,6 @@ router.post('/login', (req, res, next) => {
         req.login(theUser, err => err ? res.status(500).json({ message: 'Session error' }) : res.status(200).json(theUser))
 
     })(req, res, next)
-})
-
-router.post('/album/new', (req,res)=>{
-    const {userId, name, description, images} = req.body
-
-    const newAlbum = new Album({userId, name, description, images})
-
-    newAlbum.save()
-        .then(res.json({message: 'Se ha creado un nuevo álbum'}))
-        .catch(err => res.send(err))
 })
 
 router.post('/logout', (req, res) => {
