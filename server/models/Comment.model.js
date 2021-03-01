@@ -6,7 +6,6 @@ const commentSchema = new Schema(
     userId: {
         type: Schema.Types.ObjectId,
         ref: 'User',
-        autopopulate: true,
     },
     body: {
         type: String,
@@ -17,7 +16,6 @@ const commentSchema = new Schema(
             {
                 type: Schema.Types.ObjectId,
                 ref: 'User',
-                autopopulate: true,
             }
         ]
     }

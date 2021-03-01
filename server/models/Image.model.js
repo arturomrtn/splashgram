@@ -10,7 +10,6 @@ const imageSchema = new Schema(
 			{
 				type: Schema.Types.ObjectId,
 				ref: 'Comment',
-				autopopulate: true,
 			},
 		],
 	},
@@ -19,7 +18,6 @@ const imageSchema = new Schema(
 	}
 );
 
-imageSchema.plugin(require('mongoose-autopopulate'));
 
 const Image = mongoose.model('Image', imageSchema)
 module.exports = Image

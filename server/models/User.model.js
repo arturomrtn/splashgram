@@ -43,7 +43,6 @@ const userSchema = new Schema(
 			{
 				type: Schema.Types.ObjectId,
 				ref: 'Comment',
-				autopopulate: true,
 			},
 		],
 	},
@@ -52,7 +51,6 @@ const userSchema = new Schema(
 	}
 );
 
-userSchema.plugin(require('mongoose-autopopulate'));
 
 const User = mongoose.model('User', userSchema)
 module.exports = User

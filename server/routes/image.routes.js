@@ -2,15 +2,15 @@ const express = require("express")
 const router = express.Router()
 const Image = require("../models/Image.model")
 
-router.post('/newImage', ( req, res ) =>{
-	console.log( req.body )
+router.post('/newImage', (req, res) => {
+    console.log(req.body)
 
-	Image.create({
-		link: req.body.link,
-		author: req.body.author,
-		dateUploaded: new Date( Date.now ),
-	})
-	    .then(response => res.json(response))
+    Image.create({
+        link: req.body.link,
+        author: req.body.author,
+        dateUploaded: new Date(Date.now),
+    })
+        .then(response => res.json(response))
         .catch(err => res.status(500).json({ code: 500, message: 'Error saving image', err }))
 })
 
@@ -40,12 +40,12 @@ router.put('/editImage/:image_id', (req, res) => {
 
 })
 
-router.delete('/delete/:id', ( req, res ) =>{
-    
+router.delete('/deleteImage/:image_id', (req, res) => {
+
     Image
-    .findByIdAndUpdate
-	.then(response => res.json(response))
-    .catch(err => res.status(500).json({ code: 500, message: 'Error deleting image', err }))
+        .findByIdAndRemove
+        .then(response => res.json(response))
+        .catch(err => res.status(500).json({ code: 500, message: 'Error deleting image', err }))
 })
 
 module.exports = router

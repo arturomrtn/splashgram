@@ -6,7 +6,6 @@ const albumSchema = new Schema(
 		userId: {
 			type: Schema.Types.ObjectId,
 			ref: 'User',
-			autopopulate: true,
 		},
 		name: {
 			type: String,
@@ -22,7 +21,6 @@ const albumSchema = new Schema(
 			{
 				type: Schema.Types.ObjectId,
 				ref: 'Image',
-				autopopulate: true,
 			},
 
 		],
@@ -32,7 +30,6 @@ const albumSchema = new Schema(
 	}
 );
 
-albumSchema.plugin(require('mongoose-autopopulate'));
 
 const Album = mongoose.model('Album', albumSchema)
 module.exports = Album
