@@ -23,6 +23,7 @@ router.get('/getOneAlbum/:album_id', (req, res) => {
         .catch(err => res.status(500).json({ code: 500, message: 'Error fetching album', err }))
 })
 
+
 router.get('/getAllAlbums', (req, res) => {
 
     Album
@@ -31,19 +32,21 @@ router.get('/getAllAlbums', (req, res) => {
         .catch(err => res.status(500).json({ code: 500, message: 'Error fetching albums', err }))
 })
 
+
 router.put('/editAlbum/:album_id', (req, res) => {
 
     Album
-        .findByIdAndUpdate(req.params.image_id, req.body)
+        .findByIdAndUpdate(req.params.album_id, req.body)
         .then(response => res.json(response))
         .catch(err => res.status(500).json({ code: 500, message: 'Error editing album', err }))
 
 })
 
+
 router.delete('/deleteAlbum/:album_id', (req, res) => {
 
     Album
-        .findByIdAndRemove(req.params.image_id)
+        .findByIdAndRemove(req.params.album_id)
         .then(response => res.json(response))
         .catch(err => res.status(500).json({ code: 500, message: 'Error deleting album', err }))
 })

@@ -8,7 +8,7 @@ router.post('/newImage', (req, res) => {
     Image.create({
         link: req.body.link,
         author: req.body.author,
-        dateUploaded: new Date(Date.now),
+        date: new Date(Date.now),
     })
         .then(response => res.json(response))
         .catch(err => res.status(500).json({ code: 500, message: 'Error saving image', err }))
@@ -43,7 +43,7 @@ router.put('/editImage/:image_id', (req, res) => {
 router.delete('/deleteImage/:image_id', (req, res) => {
 
     Image
-        .findByIdAndRemove
+        .findByIdAndRemove()
         .then(response => res.json(response))
         .catch(err => res.status(500).json({ code: 500, message: 'Error deleting image', err }))
 })
