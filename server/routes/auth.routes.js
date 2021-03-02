@@ -6,7 +6,7 @@ const bcrypt = require("bcrypt")
 const User = require("../models/user.model")
 
 router.post('/register', (req, res) =>{
-    const {username, password} = req.body
+    const {username, password, lastname, firstname } = req.body
 
     if (!username || !password) {
         res.status(400).json({ message: 'Rellena todos los campos' })
@@ -30,9 +30,9 @@ router.post('/register', (req, res) =>{
             const hashPass = bcrypt.hashSync(password, salt)
 
             User
-                .create({ username, password: hashPass })
+                .create({ username, password: hashPass, lastname, firstname })
                 .then(newUser => req.login(newUser, err => err ? res.status(500).json({ message: 'Error de inicio de sesión' }) : res.status(200).json(newUser)))
-                .catch(() => res.status(500).json({ message: 'Error guardando el usuario a la BD' }))
+                .catch((error) => res.status(500).json({ message: 'Error guardando el usuario a la BD', originalMessage: error }))
         })
 })
 

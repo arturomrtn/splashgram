@@ -7,7 +7,7 @@ router.post('/newComment', (req, res) => {
 
     Comment
         .create({
-        userId: req.body.userId,
+        userId: req.body.userI,
         body: req.body.body,
     })
         .then(response => res.json(response))
