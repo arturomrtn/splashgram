@@ -1,22 +1,19 @@
 import React, { Component } from 'react'
 import './App.css';
-import { UserPanel } from './components/user/user-panel';
+import { Register } from './components/pages/Register'
 
 class App extends Component {
-  constructor(props) {
-    super(props) 
+
+  constructor() {
+    super()
     this.state = {
-      user: undefined
+      loggedUser: undefined,
+    
     }
+    this.authService = new AuthService()
   }
 
-  render() {
-    return (
-      <div className="App">
-        <UserPanel storeUser={ user => this.setState({ user }) }/>
-      </div>
-    );
+  storeUser(loggedUser) {
+    this.setState({ loggedUser }, () => console.log('Usuario modificado:', this.state.loggedUser))
   }
 }
-
-export default App;
