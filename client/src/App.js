@@ -1,8 +1,10 @@
-import React, { Component } from 'react'
+import { Component } from 'react'
 import './App.css';
-import { Register } from './components/pages/Register'
+import Register from './components/pages/Register'
+import AuthService from './service/auth.service'
 
-class App extends Component {
+
+export default class App extends Component {
 
   constructor() {
     super()

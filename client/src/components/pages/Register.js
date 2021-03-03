@@ -1,10 +1,10 @@
 
 import { Component } from 'react'
-import AuthService from '../../../service/auth.service'
+import AuthService from './../../service/auth.service'
 
 import { Form, Button, Container, Row, Col } from 'react-bootstrap'
 
-class Signup extends Component {
+class Register extends Component {
 
     constructor() {
         super()
@@ -28,7 +28,7 @@ class Signup extends Component {
         e.preventDefault()
 
         this.authService
-            .signup(this.state)
+            .register(this.state)
             .then(response => {
                 this.props.storeUser(response.data)
                 this.props.history.push('/')
@@ -67,7 +67,7 @@ class Signup extends Component {
                                 <Form.Control type="password" name="password" value={this.state.password} onChange={e => this.handleInputChange(e)} />
                             </Form.Group>
 
-                            <Button variant="dark" block type="submit">Registrarme</Button>
+                            <Button variant="dark" block type="submit">Register</Button>
                         </Form>
 
                     </Col>
