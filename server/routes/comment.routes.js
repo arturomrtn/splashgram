@@ -7,7 +7,7 @@ router.post('/newComment', (req, res) => {
 
     Comment
         .create({
-        userId: req.body.userI,
+        userId: req.body.userId,
         body: req.body.body,
     })
         .then(response => res.json(response))
@@ -15,7 +15,7 @@ router.post('/newComment', (req, res) => {
 })
 
 
-router.get('/getOneImage/:image_id', (req, res) => {
+router.get('/getOneComment/:comment_id', (req, res) => {
 
     Comment
         .findById(req.params.comment_id)
@@ -31,7 +31,7 @@ router.get('/getAllComments', (req, res) => {
         .catch(err => res.status(500).json({ code: 500, message: 'Error fetching comments', err }))
 })
 
-router.put('/editImage/:image_id', (req, res) => {
+router.put('/editComment/:comment_id', (req, res) => {
 
     Comment
         .findByIdAndUpdate(req.params.image_id, req.body)
@@ -40,7 +40,7 @@ router.put('/editImage/:image_id', (req, res) => {
 
 })
 
-router.delete('/deleteImage/:image_id', (req, res) => {
+router.delete('/deleteComment/:comment_id', (req, res) => {
 
     Comment
         .findByIdAndRemove

@@ -1,6 +1,6 @@
 
 import { Component } from 'react'
-import AuthService from './../../service/auth.service'
+import AuthService from '../service/auth.service'
 
 import { Form, Button, Container, Row, Col } from 'react-bootstrap'
 
@@ -43,9 +43,9 @@ class Register extends Component {
 
                 <Row>
 
-                    <Col md={{ span: 4, offset: 4 }}>
+                    <Col md={{ span: 2, offset: 4 }}>
 
-                        <h1>Registro de usuario</h1>
+                        <h1>REGISTER</h1>
 
                         <hr />
 
