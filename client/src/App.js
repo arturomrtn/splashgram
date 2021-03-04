@@ -1,7 +1,7 @@
 import { Component } from 'react'
 import './App.css';
 import Register from './components/Register.js'
-import Login from './components/Login.js'
+import Login from './components/Login-form.js'
 import AuthService from './service/auth.service'
 
 

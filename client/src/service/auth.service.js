@@ -10,7 +10,7 @@ class AuthService {
 
     login = userData => this.api.post('/login', userData)
     register = userData => this.api.post('/register', userData)
-    logout = () => this.api.post('/logout')
+    logOut = () => this.api.post('/logout')
     isLoggedIn = () => this.api.get('/loggedin')
 }
 
