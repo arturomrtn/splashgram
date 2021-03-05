@@ -5,7 +5,7 @@ const imageSchema = new Schema(
 	{
 		link: String,
 		author: String,
-		dateUploaded: Date,
+		description: String,
 		comments: [
 			{
 				type: Schema.Types.ObjectId,

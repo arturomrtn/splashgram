@@ -12,7 +12,7 @@ class Register extends Component {
             firstname: '',
             lastname: '',
             username: '',
-            password: '',
+            password: ''
         }
 
         this.authService = new AuthService()
@@ -52,11 +52,11 @@ class Register extends Component {
                         <Form onSubmit={e => this.handleSubmit(e)}>
                         <Form.Group>
                                 <Form.Label>Firstname</Form.Label>
-                                <Form.Control type="text" name="username" value={this.state.firstname} onChange={e => this.handleInputChange(e)} />
+                                <Form.Control type="text" name="firstname" value={this.state.firstname} onChange={e => this.handleInputChange(e)} />
                             </Form.Group>
                             <Form.Group>
                                 <Form.Label>Lastname</Form.Label>
-                                <Form.Control type="text" name="username" value={this.state.lastname} onChange={e => this.handleInputChange(e)} />
+                                <Form.Control type="text" name="lastname" value={this.state.lastname} onChange={e => this.handleInputChange(e)} />
                             </Form.Group>
                             <Form.Group>
                                 <Form.Label>Username</Form.Label>
