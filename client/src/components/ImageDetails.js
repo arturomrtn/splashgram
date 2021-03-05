@@ -11,13 +11,17 @@ class ImageDetails extends Component {
 
 
     render(){
-        const { author, link, description } = this.props
-        console.log(this.props)
+        const {location} = this.props
+        const params = new URLSearchParams(location.search)
+
         return(
             <div>
-                <img src={link}/>
-                <p>{description}</p>
-                <p>{author}</p>
+
+                <img src={params.get('link')} width="100%"/>
+                <p>{params.get ('description')}</p>
+                <p>{params.get ('author')}</p>
+                <input></input>
+                <button> Add to album </button>
 
             </div>
         )

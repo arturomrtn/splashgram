@@ -12,9 +12,12 @@ class UnsplashSuggestions extends Component {
     }
 
     componentDidMount() {
+        
         const unsplashService = new UnsplashService()
 
-        unsplashService.getRandomImages().then(images => {
+        unsplashService
+        .getRandomImages()
+        .then(images => {
             this.setState({
                 images: images
             })
@@ -22,13 +25,14 @@ class UnsplashSuggestions extends Component {
     }
 
     render(){
-        const { images } = this.state
+
+        const {images} = this.state
 
         return(
             <div>
                 {
                     images.map( image => (
-                        <Link to={`/image-details?author=${ image.author }&link=${ image.link }&description=${ image.description }`} className="btn btn-dark">
+                        <Link to={`/image-details?author=${ image.author }&link=${ image.link }&description=${ image.description }`} className="btn btn-dark"> 
                             <img 
                                 key={image.link} 
                                 src= {image.link} 

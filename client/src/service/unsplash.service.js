@@ -10,9 +10,11 @@ class UnsplashService {
     }
 
     getRandomImages = ()=> {
-        return new Promise(resolve => {
-            this.api.get('photos/random?count=10').then(resp =>{
-                console.log(resp)
+            return new Promise(resolve => {
+            this.api
+            .get('photos/random?count=10')
+            .then(resp =>{
+                
                 const linksArray = resp.data.map(image => {
                     return ({
                         link: image.urls.regular,

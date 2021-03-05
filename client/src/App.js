@@ -1,7 +1,5 @@
 import { Component } from 'react'
 import './App.css';
-import Register from './components/Register.js'
-import Login from './components/Login-form.js'
 import AuthService from './service/auth.service'
 import Header from './components/Header.js'
 import { Switch, Route } from 'react-router-dom'
