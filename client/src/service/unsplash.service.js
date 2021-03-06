@@ -5,7 +5,7 @@ class UnsplashService {
     constructor() {
         this.api = axios.create({
             baseURL: `https://api.unsplash.com/`,
-            headers: { 'Authorization': 'Client-ID ' + 'API KEY' }
+            headers: { 'Authorization': 'Client-ID ' + 'xZqCoGBcsRLiNP7Nlvizw6lBKCuCJZkAFfcEipNUvQM' }
         })
     }
 

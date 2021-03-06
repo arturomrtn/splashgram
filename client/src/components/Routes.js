@@ -2,7 +2,7 @@ import { React } from 'react'
 import { Switch, Route, Redirect } from 'react-router-dom'
 import ImageDetails from './ImageDetails'
 import Register from './Register'
-import Login from './Login-form'
+import Login from './LoginForm'
 import UnsplashSuggestions from './UnsplashSuggestions'
 
 const Routes = ({storeUser}) => {

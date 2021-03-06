@@ -39,12 +39,6 @@ const userSchema = new Schema(
 			required: true,
 		},
 		avatar: String,
-		comments: [
-			{
-				type: Schema.Types.ObjectId,
-				ref: 'Comment',
-			},
-		],
 	},
 	{
 		timestamps: true,

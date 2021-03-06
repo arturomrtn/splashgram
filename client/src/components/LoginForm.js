@@ -1,5 +1,5 @@
 import { Component } from 'react'
-import AuthService from './Login-form.js'
+import AuthService from './LoginForm.js'
 
 import { Form, Button, Container, Row, Col } from 'react-bootstrap'
 

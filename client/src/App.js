@@ -1,10 +1,12 @@
 import { Component } from 'react'
+import 'dotenv/config'
 import './App.css';
 import AuthService from './service/auth.service'
-import Header from './components/Header.js'
-import { Switch, Route } from 'react-router-dom'
-import UnsplashSuggestions from './components/UnsplashSuggestions'
+import MenuBar from './components/layout/MenuBar.js'
+//import { Switch, Route } from 'react-router-dom'
+//import UnsplashSuggestions from './components/UnsplashSuggestions'
 import Routes from './components/Routes'
+
 
 
 export default class App extends Component {
@@ -26,7 +28,7 @@ export default class App extends Component {
   {
     return(
       <div> 
-        <Header/>
+        <MenuBar/>
         <main>
           <Routes storeUser={user => this.storeUser(user)} loggedUser={this.state.loggedUser} />
         </main>

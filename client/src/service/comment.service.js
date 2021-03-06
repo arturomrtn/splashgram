@@ -12,7 +12,7 @@ class CommentService {
     getOneComment = commentId => this.api.get(`/getOneComment/${commentId}`)
     createComment = commentDetails => this.api.post('/newComment', commentDetails)
     editComment = (commentId, commentDetails) => this.api.put(`/editComment/${commentId}`, commentDetails)
-    deleteImage = (commentId) => this.api.delete(`/deleteComment/${commentId}`)
+    deleteComment = (commentId) => this.api.delete(`/deleteComment/${commentId}`)
 }
 
 export default CommentService
