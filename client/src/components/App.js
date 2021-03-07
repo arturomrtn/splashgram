@@ -4,7 +4,6 @@ import './App.css';
 import AuthService from '../service/auth.service'
 import Navigation from './layout/Navigation/Navigation'
 //import { Switch, Route } from 'react-router-dom'
-//import UnsplashSuggestions from './components/UnsplashSuggestions'
 import Routes from './routes/Routes'
 
 

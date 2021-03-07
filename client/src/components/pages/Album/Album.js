@@ -1,12 +1,11 @@
 import React, { Component } from 'react'
 import AlbumService from '../../../service/album.service'
-import { Button, Card } from 'react-bootstrap';
+import AlbumsList from './AlbumsList'
 
 
 class Album extends Component {
     constructor() {
         super()
-
         this.state = {
             albums: [],
             //user: this.props.storeUser
@@ -33,20 +32,7 @@ class Album extends Component {
         return (
             <div>
                 <h1>Mis albums</h1>
-                {
-                    albums.map(album => (
-                        <Card style={{ width: '18rem' }} key={album._id}>
-                            <Card.Img variant="top" src="holder.js/100px180" />
-                            <Card.Body>
-                                <Card.Title>{album.name}</Card.Title>
-                                <Card.Text>
-                                    {album.description}
-                                </Card.Text>
-                                <Button variant="primary">Abrir album</Button>
-                            </Card.Body>
-                        </Card>
-                    ))
-                    }
+                 <AlbumsList albums={this.state.albums}/>
             </div>
         )
     }

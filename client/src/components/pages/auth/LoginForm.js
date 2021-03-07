@@ -1,21 +1,19 @@
-
 import { Component } from 'react'
-import AuthService from '../service/auth.service'
+import AuthService from '../../../service/auth.service'
 
 import { Form, Button, Container, Row, Col } from 'react-bootstrap'
 
-class SignUp extends Component {
+class Login extends Component {
 
     constructor() {
         super()
         this.state = {
-            firstname: '',
-            lastname: '',
             username: '',
             password: ''
         }
 
         this.authService = new AuthService()
+
     }
 
     handleInputChange(e) {
@@ -28,12 +26,12 @@ class SignUp extends Component {
         e.preventDefault()
 
         this.authService
-            .register(this.state)
+            .login(this.state)
             .then(response => {
                 this.props.storeUser(response.data)
                 this.props.history.push('/')
             })
-            .catch(err => console.log({ err }))
+            .catch(err => this.props.handleAlert(true, 'Error', err.response.data.message))
     }
 
 
@@ -43,33 +41,23 @@ class SignUp extends Component {
 
                 <Row>
 
-                    <Col md={{ span: 2, offset: 4 }}>
+                    <Col md={{ span: 4, offset: 4 }}>
 
-                        <h1>Sign Up</h1>
+                        <h1>Iniciar sesión</h1>
 
                         <hr />
 
                         <Form onSubmit={e => this.handleSubmit(e)}>
-                        <Form.Group>
-                                <Form.Label>Firstname</Form.Label>
-                                <Form.Control type="text" name="firstname" value={this.state.firstname} onChange={e => this.handleInputChange(e)} />
-                            </Form.Group>
-                            <Form.Group>
-                                <Form.Label>Lastname</Form.Label>
-                                <Form.Control type="text" name="lastname" value={this.state.lastname} onChange={e => this.handleInputChange(e)} />
-                            </Form.Group>
                             <Form.Group>
                                 <Form.Label>Username</Form.Label>
                                 <Form.Control type="text" name="username" value={this.state.username} onChange={e => this.handleInputChange(e)} />
                             </Form.Group>
                             <Form.Group>
-                                <Form.Label>Password</Form.Label>
+                                <Form.Label>Contraseña</Form.Label>
                                 <Form.Control type="password" name="password" value={this.state.password} onChange={e => this.handleInputChange(e)} />
                             </Form.Group>
-                            <Form.Group>
-                            </Form.Group>
 
-                            <Button variant="dark" block type="submit">Register</Button>
+                            <Button variant="dark" block type="submit">Acceder</Button>
                         </Form>
 
                     </Col>
@@ -83,4 +71,4 @@ class SignUp extends Component {
 
 
 
-export default SignUp
+export default Login
