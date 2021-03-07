@@ -66,6 +66,10 @@ class Register extends Component {
                                 <Form.Label>Password</Form.Label>
                                 <Form.Control type="password" name="password" value={this.state.password} onChange={e => this.handleInputChange(e)} />
                             </Form.Group>
+                            <Form.Group>
+                                {/*<Form.Label>Confirm Password</Form.Label>
+                                <Form.Control type="password" name="confirmpassword" />*/}
+                            </Form.Group>
 
                             <Button variant="dark" block type="submit">Register</Button>
                         </Form>

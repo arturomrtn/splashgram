@@ -28,7 +28,7 @@ export default class App extends Component {
   {
     return(
       <div> 
-        <MenuBar/>
+        <MenuBar storeUser={this.state.loggedUser}/>
         <main>
           <Routes storeUser={user => this.storeUser(user)} loggedUser={this.state.loggedUser} />
         </main>

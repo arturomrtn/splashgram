@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import {Navbar, Nav, NavDropdown, Form, FormControl, Button } from 'react-bootstrap';
+import { Navbar, Nav, NavDropdown, Form, FormControl, Button } from 'react-bootstrap';
 import { Link } from 'react-router-dom';
 import AuthService from '../../service/auth.service';
 
@@ -12,7 +12,7 @@ class MenuBar extends Component {
 		};
 	}
 
-	logOut = () => {
+	logOut() {
 		this.authservice
 			.logout()
 			.then((res) => {
@@ -21,7 +21,7 @@ class MenuBar extends Component {
 				this.props.history.push('/');
 			})
 			.catch((err) => console.log(err));
-	};
+	}
 
 	render() {
 		return (
@@ -32,18 +32,21 @@ class MenuBar extends Component {
 					<Navbar.Collapse id='basic-navbar-nav'>
 						<Nav className='mr-auto'>
 							<Nav.Link href='/'>Home</Nav.Link>
-							{this.props.loggedUser ? (
+							{this.state.user ? (
 								<>
 									<Nav.Link href='/myalbums'>My Albums</Nav.Link>
 									<NavDropdown
 										title={this.state.user.username}
 										id='basic-nav-dropdown'
 									>
-										<NavDropdown.Item href='#action/3.1'>
+										<NavDropdown.Item>
 											<Link to='/mybio'>Bio</Link>
 										</NavDropdown.Item>
-										<NavDropdown.Item href='#action/3.3'>
-											Profile
+										<NavDropdown.Item>
+											<Link to='/mybio'>Profile</Link>
+										</NavDropdown.Item>
+										<NavDropdown.Item onClick={this.logOut}>
+											Logout
 										</NavDropdown.Item>
 									</NavDropdown>
 								</>
@@ -52,17 +55,8 @@ class MenuBar extends Component {
 							)}
 						</Nav>
 						<Nav>
-							{this.props.loggedUser ? (
-								<>
-									<Link to={`/profile`} className='profile-link'>
-										<Nav.Link as='div'>
-											{this.props.loggedUser.username}
-										</Nav.Link>
-									</Link>
-									<Nav.Link as='div' onClick={this.logOut}>
-										Salir
-									</Nav.Link>
-								</>
+							{this.props.storeUser ? (
+								''
 							) : (
 								<>
 									<Link to='/register'>
@@ -74,7 +68,7 @@ class MenuBar extends Component {
 								</>
 							)}
 						</Nav>
-						{this.props.loggedUser ? (
+						{this.props.storeUser ? (
 							<Form inline>
 								<FormControl
 									type='text'

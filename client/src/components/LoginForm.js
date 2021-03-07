@@ -1,5 +1,5 @@
 import { Component } from 'react'
-import AuthService from './LoginForm.js'
+import AuthService from '../service/auth.service'
 
 import { Form, Button, Container, Row, Col } from 'react-bootstrap'
 
@@ -9,8 +9,6 @@ class Login extends Component {
         super()
         this.state = {
             username: '',
-            firstname: '',
-            lastname: '',
             password: ''
         }
 
@@ -51,16 +49,8 @@ class Login extends Component {
 
                         <Form onSubmit={e => this.handleSubmit(e)}>
                             <Form.Group>
-                                <Form.Label>Usuario</Form.Label>
+                                <Form.Label>Username</Form.Label>
                                 <Form.Control type="text" name="username" value={this.state.username} onChange={e => this.handleInputChange(e)} />
-                            </Form.Group>
-                            <Form.Group>
-                                <Form.Label>Usuario</Form.Label>
-                                <Form.Control type="text" name="firstname" value={this.state.firstname} onChange={e => this.handleInputChange(e)} />
-                            </Form.Group>
-                            <Form.Group>
-                                <Form.Label>Usuario</Form.Label>
-                                <Form.Control type="text" name="lastname" value={this.state.lastname} onChange={e => this.handleInputChange(e)} />
                             </Form.Group>
                             <Form.Group>
                                 <Form.Label>Contraseña</Form.Label>
