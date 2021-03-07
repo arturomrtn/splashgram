@@ -15,6 +15,7 @@ class Album extends Component {
         this.albumService = new AlbumService()
     }
 
+//checkout
     componentDidMount() {
 
             this.albumService
@@ -27,6 +28,7 @@ class Album extends Component {
     render() {
         
         const { albums } = this.state
+        console.log(albums)
 
 
         return (
