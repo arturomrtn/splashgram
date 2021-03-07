@@ -15,7 +15,6 @@ class Album extends Component {
         this.albumService = new AlbumService()
     }
 
-//checkout
     componentDidMount() {
 
             this.albumService
