@@ -27,6 +27,7 @@ class UnsplashSuggestions extends Component {
     render(){
 
         const {images} = this.state
+        console.log(images)
 
         return(
             <div>

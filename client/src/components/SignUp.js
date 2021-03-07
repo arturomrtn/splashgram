@@ -4,7 +4,7 @@ import AuthService from '../service/auth.service'
 
 import { Form, Button, Container, Row, Col } from 'react-bootstrap'
 
-class Register extends Component {
+class SignUp extends Component {
 
     constructor() {
         super()
@@ -45,7 +45,7 @@ class Register extends Component {
 
                     <Col md={{ span: 2, offset: 4 }}>
 
-                        <h1>REGISTER</h1>
+                        <h1>Sign Up</h1>
 
                         <hr />
 
@@ -67,8 +67,6 @@ class Register extends Component {
                                 <Form.Control type="password" name="password" value={this.state.password} onChange={e => this.handleInputChange(e)} />
                             </Form.Group>
                             <Form.Group>
-                                {/*<Form.Label>Confirm Password</Form.Label>
-                                <Form.Control type="password" name="confirmpassword" />*/}
                             </Form.Group>
 
                             <Button variant="dark" block type="submit">Register</Button>
@@ -85,4 +83,4 @@ class Register extends Component {
 
 
 
-export default Register
+export default SignUp
