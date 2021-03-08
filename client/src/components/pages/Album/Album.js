@@ -17,8 +17,12 @@ class Album extends Component {
     componentDidMount() {
 
             this.albumService
-            .getAllAlbums()
-            .then(response => this.setState({ albums: response.data }))
+            //.getAlbumsByOwner(this.props.storeUser.userId)
+            .getAlbumsByOwner('604378e1b1e00ba51c9408d1')
+            .then(response => {
+                console.log( '*******', response )
+                this.setState({ albums: response.data })
+            })
             .catch(err => console.log(err))
     }
     

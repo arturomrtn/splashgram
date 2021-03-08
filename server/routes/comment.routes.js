@@ -19,7 +19,7 @@ router.get('/getOneComment/:comment_id', (req, res) => {
 
     Comment
         .findById(req.params.comment_id)
-        .then(response => setTimeout(() => res.json(response), 1000))
+        .then(response => res.json(response))
         .catch(err => res.status(500).json({ code: 500, message: 'Error fetching comment', err }))
 })
 
@@ -27,7 +27,7 @@ router.get('/getAllComments', (req, res) => {
 
     Comment
         .find()
-        .then(response => setTimeout(() => res.json(response), 1000))
+        .then(response => res.json(response))
         .catch(err => res.status(500).json({ code: 500, message: 'Error fetching comments', err }))
 })
 

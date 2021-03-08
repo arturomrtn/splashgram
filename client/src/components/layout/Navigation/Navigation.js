@@ -32,9 +32,11 @@ class Navigation extends Component {
 					<Navbar.Toggle aria-controls='basic-navbar-nav' />
 					<Navbar.Collapse id='basic-navbar-nav'>
 						<Nav className='mr-auto'>
-							<Nav.Link href='/'>Home</Nav.Link>
-								<Nav.Item></Nav.Item>
-										<Nav.Link to='/myalbums'>My Albums</Nav.Link>
+							<Nav.Link to="/" as={Link}>Home</Nav.Link>
+								<Nav.Item>
+
+								<Nav.Link to='/myalbums' as={Link}>My Albums</Nav.Link>
+								</Nav.Item>
 									<NavDropdown
 										title={this.props.storeUser ? 'Username' : 'User'}
 										id='basic-nav-dropdown'

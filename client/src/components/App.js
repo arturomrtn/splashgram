@@ -22,6 +22,7 @@ export default class App extends Component {
   storeUser(loggedUser) {
     this.setState({ loggedUser }, () => console.log('Usuario modificado:', this.state.loggedUser))
   }
+  //cuando monte llamar a loggedInUser y guardar el usuario del backend
 
   render()
   {

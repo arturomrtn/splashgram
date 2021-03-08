@@ -19,16 +19,26 @@ router.get('/getOneAlbum/:album_id', (req, res) => {
 
     Album
         .findById(req.params.album_id)
-        .then(response => setTimeout(() => res.json(response), 1000))
+        .then(response => res.json(response))
         .catch(err => res.status(500).json({ code: 500, message: 'Error fetching album', err }))
 })
 
+
+router.get('/getAlbumsByOwner/:user_id', (req, res) => {
+
+    console.log( req.params )
+
+    Album
+        .find({ userId: req.params.user_id })
+        .then(response => res.json(response))
+        .catch(err => res.status(500).json(err))
+})
 
 router.get('/getAllAlbums', (req, res) => {
 
     Album
         .find()
-        .then(response => setTimeout(() => res.json(response), 1000))
+        .then(response => res.json(response))
         .catch(err => res.status(500).json({ code: 500, message: 'Error fetching albums', err }))
 })
 

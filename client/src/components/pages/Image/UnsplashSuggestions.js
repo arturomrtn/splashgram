@@ -1,5 +1,5 @@
 import React, { Component } from 'react'
-import UnsplashService from '../service/unsplash.service'
+import UnsplashService from '../../../service/unsplash.service'
 import { Link } from 'react-router-dom'
 
 class UnsplashSuggestions extends Component {

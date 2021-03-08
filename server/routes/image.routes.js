@@ -19,7 +19,7 @@ router.get('/getOneImage/:image_id', (req, res) => {
 
     Image
         .findById(req.params.image_id)
-        .then(response => setTimeout(() => res.json(response), 1000))
+        .then(response => res.json(response))
         .catch(err => res.status(500).json({ code: 500, message: 'Error fetching image', err }))
 })
 
@@ -27,7 +27,7 @@ router.get('/getAllImages', (req, res) => {
 
     Image
         .find()
-        .then(response => setTimeout(() => res.json(response), 1000))
+        .then(response => res.json(response))
         .catch(err => res.status(500).json({ code: 500, message: 'Error fetching images', err }))
 })
 
