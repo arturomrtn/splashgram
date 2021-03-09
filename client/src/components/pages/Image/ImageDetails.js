@@ -8,8 +8,8 @@ class ImageDetails extends Component {
         this.state = {
             albums: [],
             image: null,
-            selectedAlbum: ""
-        
+            selectedAlbum: {}
+
         }
 
         this.albumService = new AlbumService()
@@ -18,8 +18,8 @@ class ImageDetails extends Component {
     componentDidMount() {
 
         this.albumService
-            
-            .getAlbumsByOwner('604378e1b1e00ba51c9408d1')
+
+            .getAlbumsByOwner(this.props.storeUser._id || '604378e1b1e00ba51c9408d1')
             .then(response => {
                 this.setState({ albums: response.data })
             })
@@ -27,30 +27,42 @@ class ImageDetails extends Component {
     }
 
     handleSelectChange(event) {
-        this.setState ({selectedAlbum: event.target.value})
+        this.setState({ selectedAlbum: this.state.albums[ event.target.value ] })
     }
 
     handleAddToAlbum() {
-        
-        
-        //this.albumService.editAlbum(this.state.selectedAlbum._id)
+        if ( !this.state.selectedAlbum.images ) this.state.selectedAlbum.images = []
+        this.state.selectedAlbum.images.push( this.getSelectedImage())
+        this.albumService.editAlbum(this.state.selectedAlbum._id, this.state.selectedAlbum)
+    }
+
+    getSelectedImage() {
+        const { location } = this.props
+        const params = new URLSearchParams(location.search)
+        return {
+            _id: params.get('id'),
+            link: params.get('link'),
+            description: params.get('description'),
+            author: params.get('author')
+        }
+
     }
 
     render() {
-        const { location } = this.props
-        const { albums, selectedAlbum } = this.state
-        const params = new URLSearchParams(location.search)
-
+        const { albums } = this.state
+        const { link, author, description } = this.getSelectedImage()
         return (
             <div>
 
-                <img src={params.get('link')} width="100%" />
-                <p>{params.get('description')}</p>
-                <p>{params.get('author')}</p>
-                <select name="selectedAlbum"  onChange={event => this.handleSelectChange(event)}>
-                    {albums?.map(elm => <option key={elm.name} value={elm}>{elm.name}</option>)}
+                <img src={link} width="100%" />
+                <p>{description}</p>
+                <p>{author}</p>
+                <select name="selectedAlbum" onChange={event => this.handleSelectChange(event)}>
+                    {albums?.map( (elm, index) => {
+                        return <option key={elm.name} value={index}>{elm.name}</option>
+                    })}
                 </select>
-                <button onClick={ () => this.handleAddToAlbum()}>Add to album</button>
+                <button onClick={() => this.handleAddToAlbum()}>Add to album</button>
             </div>
         )
     }

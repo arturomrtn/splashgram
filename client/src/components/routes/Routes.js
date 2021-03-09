@@ -10,8 +10,8 @@ const Routes = ({storeUser}) => {
 
     return (
         <Switch>
-            <Route path="/" exact render={() => <UnsplashSuggestions />} />
-            <Route path="/image-details" render={props => <ImageDetails {...props} />} />
+            <Route path="/" exact render={ props => <UnsplashSuggestions storeUser={storeUser} {...props} key={new Date(Date.now()).toISOString()}/>} />
+            <Route path="/image-details" render={props => <ImageDetails storeUser={storeUser} {...props} />} />
             <Route path="/register" render={props => <SignUp storeUser={storeUser}  {...props} />} />
             <Route path="/login" render={props => <Login storeUser={storeUser} {...props} />} />
             <Route path="/myalbums" render={props => <Album storeUser={storeUser} /> } />

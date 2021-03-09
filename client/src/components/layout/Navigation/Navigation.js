@@ -6,11 +6,13 @@ import AuthService from '../../../service/auth.service';
 
 class Navigation extends Component {
 	constructor(props) {
-		super(props);
-		this.authservice = new AuthService();
+		super(props)
+
 		this.state = {
 			user: this.props.storeUser,
+			value: ''
 		};
+		this.authservice = new AuthService();
 	}
 
 	logOut() {
@@ -24,6 +26,14 @@ class Navigation extends Component {
 			.catch((err) => console.log(err));
 	}
 
+	onInputChange = (event) => {
+		this.setState({ value: event.target.value })
+	}
+
+	onFormSubmit = (event) => {
+		event.preventDefault()
+	}
+
 	render() {
 		return (
 			<>
@@ -33,42 +43,50 @@ class Navigation extends Component {
 					<Navbar.Collapse id='basic-navbar-nav'>
 						<Nav className='mr-auto'>
 							<Nav.Link to="/" as={Link}>Home</Nav.Link>
-								<Nav.Item>
+							<Nav.Item>
 
 								<Nav.Link to='/myalbums' as={Link}>My Albums</Nav.Link>
-								</Nav.Item>
-									<NavDropdown
-										title={this.props.storeUser ? 'Username' : 'User'}
-										id='basic-nav-dropdown'
-									>
-										<NavDropdown.Item>
-											<Link to='/mybio'>Bio</Link>
+							</Nav.Item>
+							<NavDropdown
+								title={this.props.storeUser ? 'Username' : 'User'}
+								id='basic-nav-dropdown'
+							>
+								<NavDropdown.Item>
+									<Link to='/mybio'>Bio</Link>
+								</NavDropdown.Item>
+								<NavDropdown.Item>
+									<Link to='/mybio'>Profile</Link>
+								</NavDropdown.Item>
+								<NavDropdown.Item onClick={this.logOut}>
+									Logout
 										</NavDropdown.Item>
-										<NavDropdown.Item>
-											<Link to='/mybio'>Profile</Link>
-										</NavDropdown.Item>
-										<NavDropdown.Item onClick={this.logOut}>
-											Logout
-										</NavDropdown.Item>
-									</NavDropdown>
+							</NavDropdown>
 						</Nav>
 						<Nav>
-									<Link to='/register'>
-										<Nav.Link as='div'>Registro</Nav.Link>
-									</Link>
-									<Link to='/login'>
-										<Nav.Link as='div'>Inicio de sesión</Nav.Link>
-									</Link>
+							<Link to='/register'>
+								<Nav.Link as='div'>Registro</Nav.Link>
+							</Link>
+							<Link to='/login'>
+								<Nav.Link as='div'>Inicio de sesión</Nav.Link>
+							</Link>
 
 						</Nav>
 						{this.props.storeUser ? (
-							<Form inline>
+							<Form inline onSubmit={e => this.handleSubmit(e)}>
 								<FormControl
 									type='text'
+									value={this.state.value}
+									onChange={this.onInputChange}
 									placeholder='Search'
 									className='mr-sm-2'
 								/>
-								<Button variant='outline-success'>Search</Button>
+								{/*<Button onClick={ () =>this.props.history.push(`/?queryString=${ this.state.value }`)} variant='outline-success'>Search</Button>*/}
+								<Link to={{
+									pathname: "/",
+									search: `?queryString=${this.state.value}`,
+									state: { fromDashboard: true }
+								}}
+								>Search</Link>
 							</Form>
 						) : (
 							''

@@ -14,7 +14,7 @@ export default class App extends Component {
     super()
     this.state = {
       loggedUser: undefined,
-    
+      //searchText
     }
     this.authService = new AuthService()
   }
@@ -22,15 +22,25 @@ export default class App extends Component {
   storeUser(loggedUser) {
     this.setState({ loggedUser }, () => console.log('Usuario modificado:', this.state.loggedUser))
   }
-  //cuando monte llamar a loggedInUser y guardar el usuario del backend
+
+  fetchUser() {
+    this.authService
+      .isLoggedIn()
+      .then(response => this.storeUser(response.data))
+      .catch(() => this.storeUser(undefined))
+  }
+
+  componentDidMount() {
+    this.fetchUser()
+  }
 
   render()
   {
     return(
       <div> 
-        <Navigation storeUser={this.state.loggedUser}/>
+        <Navigation  storeUser={user => this.storeUser(user)}/>
         <main>
-          <Routes storeUser={user => this.storeUser(user)} loggedUser={this.state.loggedUser} />
+          <Routes  storeUser={user => this.storeUser(user)} loggedUser={this.state.loggedUser} />
         </main>
       </div>
     );

@@ -11,17 +11,38 @@ class UnsplashSuggestions extends Component {
         }
     }
 
+ 
     componentDidMount() {
-        
         const unsplashService = new UnsplashService()
 
-        unsplashService
-        .getRandomImages()
-        .then(images => {
-            this.setState({
-                images: images
+        const query = this.getQuery()
+
+        console.log('***', query )
+
+        if ( query ) {
+            unsplashService
+            .searchImages(query)
+            .then(images => {
+                this.setState({
+                    images: images
+                })
             })
-        })
+            
+        }
+        else {
+            unsplashService
+            .getRandomImages()
+            .then(images => {
+                this.setState({
+                    images: images
+                })
+            })
+        }
+    }
+    getQuery() {
+        const { location } = this.props
+        const params = new URLSearchParams(location.search)
+        return params.get('queryString')
     }
 
     render(){
@@ -33,7 +54,7 @@ class UnsplashSuggestions extends Component {
             <div>
                 {
                     images.map( image => (
-                        <Link to={`/image-details?author=${ image.author }&link=${ image.link }&description=${ image.description }`} className="btn btn-dark"> 
+                        <Link to={`/image-details?id=${image._id}&author=${ image.author }&link=${ image.link }&description=${ image.description }`} className="btn btn-dark"> 
                             <img 
                                 key={image.link} 
                                 src= {image.link} 

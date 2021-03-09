@@ -9,24 +9,43 @@ class UnsplashService {
         })
     }
 
-    getRandomImages = ()=> {
-            return new Promise(resolve => {
+    getRandomImages = () => {
+        return new Promise(resolve => {
             this.api
-            .get('photos/random?count=10')
-            .then(resp =>{
-                
-                const linksArray = resp.data.map(image => {
-                    return ({
-                        link: image.urls.regular,
-                        author: image.user.name,
-                        description: image.description
+                .get('photos/random?count=10')
+                .then(resp => {
+
+                    const linksArray = resp.data.map(image => {
+                        return ({
+                            link: image.urls.regular,
+                            author: image.user.name,
+                            description: image.description
+                        })
                     })
+                    resolve(linksArray)
                 })
-                resolve(linksArray)
-            })
         })
     }
-   
+
+    searchImages = ( query ) => {
+        return new Promise(resolve => {
+            this.api
+                .get('search/photos?query='+query)
+                .then(resp => {
+
+                    const linksArray = resp.data.map(image => {
+                        return ({
+                            link: image.urls.regular,
+                            author: image.user.name,
+                            description: image.description
+                        })
+                    })
+                    resolve(linksArray)
+                })
+        })
+
+    }
+
 }
 
 export default UnsplashService
