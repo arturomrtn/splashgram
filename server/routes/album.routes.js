@@ -1,6 +1,7 @@
 const express = require("express")
 const router = express.Router()
 const Album = require("../models/Album.model")
+const Image = require("../models/Image.model")
 
 
 router.post('/newAlbum', (req, res) => {
@@ -44,7 +45,10 @@ router.get('/getAllAlbums', (req, res) => {
 
 
 router.put('/editAlbum/:album_id', (req, res) => {
+    console.log(req.body, req.params)
 
+    //Image.create()
+    //usar el id para editar el album
     Album
         .findByIdAndUpdate(req.params.album_id, req.body)
         .then(response => res.json(response))
@@ -52,6 +56,18 @@ router.put('/editAlbum/:album_id', (req, res) => {
 
 })
 
+router.put('/addImageToAlbum/:album_id', (req, res) => {
+    console.log(req.params.album_id, req.body.albumDetails, req.body.image)
+
+    Image.create(req.body.image).then(()=>{   
+        Album
+        .findByIdAndUpdate(req.params.album_id, req.body.albumDetails)
+        .then(response => res.json(response))
+        .catch(err => res.status(500).json({ code: 500, message: 'Error adding image to album', err }))
+    })
+   
+ 
+})
 
 router.delete('/deleteAlbum/:album_id', (req, res) => {
 

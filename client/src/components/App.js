@@ -38,7 +38,7 @@ export default class App extends Component {
   {
     return(
       <div> 
-        <Navigation  storeUser={user => this.storeUser(user)}/>
+        <Navigation  storeUser={user => this.storeUser(user)} loggedUser={this.state.loggedUser}/>
         <main>
           <Routes  storeUser={user => this.storeUser(user)} loggedUser={this.state.loggedUser} />
         </main>

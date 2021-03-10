@@ -27,7 +27,7 @@ class SignUp extends Component {
         e.preventDefault()
 
         this.authService
-            .register(this.state)
+            .signUp(this.state)
             .then(response => {
                 this.props.storeUser(response.data)
                 this.props.history.push('/')
@@ -68,7 +68,7 @@ class SignUp extends Component {
                             <Form.Group>
                             </Form.Group>
 
-                            <Button variant="dark" block type="submit">Register</Button>
+                            <Button variant="dark" block type="submit">Sign up</Button>
                         </Form>
 
                     </Col>

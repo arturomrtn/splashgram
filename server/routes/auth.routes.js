@@ -5,7 +5,7 @@ const bcrypt = require("bcrypt")
 
 const User = require("../models/user.model")
 
-router.post('/register', (req, res) =>{
+router.post('/signup', (req, res) =>{
     const {username, password, lastname, firstname } = req.body
 
     if (!username || !password) {

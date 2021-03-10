@@ -9,18 +9,18 @@ class UnsplashSuggestions extends Component {
         this.state = {
             images: []
         }
+        this.unsplashService = new UnsplashService()
     }
 
  
     componentDidMount() {
-        const unsplashService = new UnsplashService()
-
+        
         const query = this.getQuery()
 
         console.log('***', query )
 
         if ( query ) {
-            unsplashService
+             this.unsplashService
             .searchImages(query)
             .then(images => {
                 this.setState({
@@ -30,7 +30,7 @@ class UnsplashSuggestions extends Component {
             
         }
         else {
-            unsplashService
+            this.unsplashService
             .getRandomImages()
             .then(images => {
                 this.setState({
@@ -39,8 +39,10 @@ class UnsplashSuggestions extends Component {
             })
         }
     }
+
     getQuery() {
         const { location } = this.props
+
         const params = new URLSearchParams(location.search)
         return params.get('queryString')
     }
@@ -48,13 +50,13 @@ class UnsplashSuggestions extends Component {
     render(){
 
         const {images} = this.state
-        console.log(images)
+
 
         return(
             <div>
                 {
                     images.map( image => (
-                        <Link to={`/image-details?id=${image._id}&author=${ image.author }&link=${ image.link }&description=${ image.description }`} className="btn btn-dark"> 
+                        <Link to={`/image-details?author=${ image.author }&link=${ image.link }&description=${ image.description }`} className="btn btn-dark"> 
                             <img 
                                 key={image.link} 
                                 src= {image.link} 

@@ -10,8 +10,7 @@ class UnsplashService {
     }
 
     getRandomImages = () => {
-        return new Promise(resolve => {
-            this.api
+        return  this.api
                 .get('photos/random?count=10')
                 .then(resp => {
 
@@ -22,9 +21,9 @@ class UnsplashService {
                             description: image.description
                         })
                     })
-                    resolve(linksArray)
+                    return linksArray
                 })
-        })
+       
     }
 
     searchImages = ( query ) => {
@@ -32,8 +31,8 @@ class UnsplashService {
             this.api
                 .get('search/photos?query='+query)
                 .then(resp => {
-
-                    const linksArray = resp.data.map(image => {
+                    console.log(resp.data)
+                    const linksArray = resp.data.results.map(image => {
                         return ({
                             link: image.urls.regular,
                             author: image.user.name,

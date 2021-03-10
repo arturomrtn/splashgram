@@ -30,7 +30,6 @@ class Album extends Component {
     render() {
         
         const { albums } = this.state
-        console.log(albums)
 
 
         return (

@@ -8,7 +8,6 @@ router.post('/newImage', (req, res) => {
     Image.create({
         link: req.body.link,
         author: req.body.author,
-        date: new Date(Date.now),
     })
         .then(response => res.json(response))
         .catch(err => res.status(500).json({ code: 500, message: 'Error saving image', err }))

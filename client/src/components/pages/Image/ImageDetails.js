@@ -33,14 +33,15 @@ class ImageDetails extends Component {
     handleAddToAlbum() {
         if ( !this.state.selectedAlbum.images ) this.state.selectedAlbum.images = []
         this.state.selectedAlbum.images.push( this.getSelectedImage())
-        this.albumService.editAlbum(this.state.selectedAlbum._id, this.state.selectedAlbum)
+        // this.albumService.editAlbum(this.state.selectedAlbum._id, this.state.selectedAlbum)
+        this.albumService.addImageToAlbum( this.state.selectedAlbum._id, this.state.selectedAlbum, this.getSelectedImage() )
     }
 
     getSelectedImage() {
         const { location } = this.props
         const params = new URLSearchParams(location.search)
         return {
-            _id: params.get('id'),
+//            _id: params.get('id'),
             link: params.get('link'),
             description: params.get('description'),
             author: params.get('author')

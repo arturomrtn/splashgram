@@ -16,6 +16,10 @@ class AlbumService {
     createAlbum = albumDetails => this.api.post('/newAlbum', albumDetails)
     editAlbum = (albumId, albumDetails) => this.api.put(`/editAlbum/${albumId}`, albumDetails)
     deleteAlbum = (albumId) => this.api.delete(`/deleteAlbum/${albumId}`)
+    addImageToAlbum = (albumId, albumDetails, image) => this.api.put(`/addImageToAlbum/${albumId}`, {
+        albumDetails: albumDetails,
+        image: image
+    })
 }
 
 export default AlbumService

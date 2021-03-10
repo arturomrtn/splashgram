@@ -12,11 +12,11 @@ class Navigation extends Component {
 			user: this.props.storeUser,
 			value: ''
 		};
-		this.authservice = new AuthService();
+		this.authService = new AuthService();
 	}
 
 	logOut() {
-		this.authservice
+		this.authService
 			.logout()
 			.then((res) => {
 				this.props.storeUser(undefined);
@@ -31,6 +31,7 @@ class Navigation extends Component {
 	}
 
 	onFormSubmit = (event) => {
+		alert("e")
 		event.preventDefault()
 	}
 
@@ -63,7 +64,7 @@ class Navigation extends Component {
 							</NavDropdown>
 						</Nav>
 						<Nav>
-							<Link to='/register'>
+							<Link to='/signup'>
 								<Nav.Link as='div'>Registro</Nav.Link>
 							</Link>
 							<Link to='/login'>
@@ -72,8 +73,10 @@ class Navigation extends Component {
 
 						</Nav>
 						{this.props.storeUser ? (
-							<Form inline onSubmit={e => this.handleSubmit(e)}>
+							<>
+							<Form inline onSubmit={e => this.onFormSubmit(e)}>
 								<FormControl
+								onSubmit={e => this.handleSubmit(e)}
 									type='text'
 									value={this.state.value}
 									onChange={this.onInputChange}
@@ -81,13 +84,14 @@ class Navigation extends Component {
 									className='mr-sm-2'
 								/>
 								{/*<Button onClick={ () =>this.props.history.push(`/?queryString=${ this.state.value }`)} variant='outline-success'>Search</Button>*/}
+							</Form>
 								<Link to={{
 									pathname: "/",
 									search: `?queryString=${this.state.value}`,
 									state: { fromDashboard: true }
 								}}
 								>Search</Link>
-							</Form>
+								</>
 						) : (
 							''
 						)}
