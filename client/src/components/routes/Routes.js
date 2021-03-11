@@ -5,6 +5,7 @@ import Album from '../pages/Album/Album'
 import SignUp from '../pages/auth/SignUp'
 import Login from '../pages/auth/LoginForm'
 import UnsplashSuggestions from '../pages/Image/UnsplashSuggestions'
+import AlbumContent from '../pages/Album/AlbumContent'
 
 const Routes = ({storeUser}) => {
 
@@ -15,6 +16,8 @@ const Routes = ({storeUser}) => {
             <Route path="/signup" render={props => <SignUp storeUser={storeUser}  {...props} />} />
             <Route path="/login" render={props => <Login storeUser={storeUser} {...props} />} />
             <Route path="/myalbums" render={props => <Album storeUser={storeUser} /> } />
+            <Route path="/myalbums-content" render={props => <AlbumContent storeUser={storeUser} {...props} /> } />
+
         </Switch>
 
     )

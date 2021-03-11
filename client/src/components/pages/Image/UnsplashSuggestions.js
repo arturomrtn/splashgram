@@ -1,6 +1,7 @@
 import React, { Component } from 'react'
 import UnsplashService from '../../../service/unsplash.service'
 import { Link } from 'react-router-dom'
+import './UnsplashSuggestions.css'
 
 class UnsplashSuggestions extends Component {
 
@@ -53,7 +54,7 @@ class UnsplashSuggestions extends Component {
 
 
         return(
-            <div>
+            <div className='unsplash-suggestions'>
                 {
                     images.map( image => (
                         <Link to={`/image-details?author=${ image.author }&link=${ image.link }&description=${ image.description }`} className="btn btn-dark"> 

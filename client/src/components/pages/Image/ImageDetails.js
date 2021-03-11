@@ -1,6 +1,7 @@
 import React, { Component } from 'react'
 //import { Dropdown } from 'react-bootstrap'
 import AlbumService from '../../../service/album.service'
+import './ImageDetails.css'
 
 class ImageDetails extends Component {
     constructor() {
@@ -53,11 +54,11 @@ class ImageDetails extends Component {
         const { albums } = this.state
         const { link, author, description } = this.getSelectedImage()
         return (
-            <div>
+            <div className="image-details">
 
                 <img src={link} width="100%" />
-                <p>{description}</p>
-                <p>{author}</p>
+                <p> Descripción: {description}</p>
+                <p> Autor: {author}</p>
                 <select name="selectedAlbum" onChange={event => this.handleSelectChange(event)}>
                     {albums?.map( (elm, index) => {
                         return <option key={elm.name} value={index}>{elm.name}</option>

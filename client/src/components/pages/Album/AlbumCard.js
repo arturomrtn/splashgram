@@ -1,5 +1,6 @@
 import React from 'react'
-import { Card, Button } from 'react-bootstrap'
+import { Card } from 'react-bootstrap'
+import { Link } from 'react-router-dom'
 
  const AlbumCard = ({name, description, _id}) => {
 
@@ -13,7 +14,7 @@ import { Card, Button } from 'react-bootstrap'
                                 <Card.Text>
                                     {description}
                                 </Card.Text>
-                                <Button variant="primary">Abrir álbum</Button>
+                                <Link to={`myalbums-content/?id=${_id}`} variant="primary">Abrir álbum</Link>
                             </Card.Body>
                         </Card>
                     

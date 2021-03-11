@@ -19,8 +19,11 @@ router.post('/newAlbum', (req, res) => {
 router.get('/getOneAlbum/:album_id', (req, res) => {
 
     Album
-        .findById(req.params.album_id)
-        .then(response => res.json(response))
+        .findById(req.params.album_id).populate('images')
+        .then(response => {
+
+            res.json(response)
+        })
         .catch(err => res.status(500).json({ code: 500, message: 'Error fetching album', err }))
 })
 
@@ -59,13 +62,22 @@ router.put('/editAlbum/:album_id', (req, res) => {
 router.put('/addImageToAlbum/:album_id', (req, res) => {
     console.log(req.params.album_id, req.body.albumDetails, req.body.image)
 
-    Image.create(req.body.image).then(()=>{   
-        Album
-        .findByIdAndUpdate(req.params.album_id, req.body.albumDetails)
+    Image.create(req.body.image).then((newImage)=>{   
+        
+        const idToPush = newImage._id
+
+     
+        Album.findByIdAndUpdate(
+            req.params.album_id, 
+            { $push: { images: newImage._id } }
+
+        )
         .then(response => res.json(response))
+        .catch(err => console.log(err => "falla actualizar album"))
         .catch(err => res.status(500).json({ code: 500, message: 'Error adding image to album', err }))
-    })
+    }).catch(err => console.log(err, "falla img"))
    
+
  
 })
 
@@ -76,7 +88,6 @@ router.delete('/deleteAlbum/:album_id', (req, res) => {
         .then(response => res.json(response))
         .catch(err => res.status(500).json({ code: 500, message: 'Error deleting album', err }))
 })
-
 
 
 module.exports = router
