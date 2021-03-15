@@ -2,11 +2,11 @@ import React, { Component } from 'react'
 import CommentService from '../../../service/album.service'
 
 class CommentForm extends Component {
-    constructor() {
+    constructor(props) {
         super(props)
 
         this.state = {
-            userId: this.props.loggedUser ? this.props.loggedUser._id : '',
+            
             body: '',
             
         }
@@ -19,9 +19,27 @@ class CommentForm extends Component {
         this.setState({ [name]: value })
     }
 
+    handleSubmit() {
+
+            this.commentService
+            .createComment({
+                userId: this.props.loggedUser._id,
+                body: this.state.body
+            })
+            .then(response => {
+                this.setState({
+                    body: ''
+                })
+            })
+            .catch(err => this.props.handleAlert(true, 'Error', err.response.data.message))
+    }
+
     render() {
         return (
             <div>
+                
+                    <input type="text" name="body" onChange={e => this.handleInputChange(e)}/>
+                    <button onClick={()=>this.handleSubmit()}> Añadir comentario </button>
                 
             </div>
         )

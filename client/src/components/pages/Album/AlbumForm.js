@@ -1,5 +1,6 @@
 import React, { Component } from 'react'
 import AlbumService from '../../../service/album.service'
+import './AlbumForm.css'
 
 class AlbumForm extends Component {
     constructor( props ) {
@@ -22,10 +23,10 @@ class AlbumForm extends Component {
 
     createNewAlbum() {
         this.albumService.createAlbum({
-            userId: this.props.storeUser.id || '604378e1b1e00ba51c9408d1',
+            userId: this.props.storeUser.userId || '604378e1b1e00ba51c9408d1',
             ...this.state
         }).then(()=> {
-            alert('Ya se creó el álbum')
+            alert('Se ha creado un nuevo álbum')
             const { onNewAlbum } = this.props
             if ( onNewAlbum ) onNewAlbum()
         })
@@ -34,7 +35,7 @@ class AlbumForm extends Component {
     
     render() {
         return (
-            <div>
+            <div className="album-form">
                 <label>Nombre:</label>
                 <input name="name" value= {this.state.name} onChange={e => this.handleInputChange(e)} />
                 <label>Descripción:</label>

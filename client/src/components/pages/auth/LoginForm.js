@@ -38,13 +38,13 @@ class Login extends Component {
 
     render() {
         return (
-            <Container>
+            <Container fluid>
 
                 <Row>
 
-                    <Col md={{ span: 4, offset: 4 }}>
+                    <Col className="sign-up container align-items-center" md={{ span: 4, offset: 4 }}>
 
-                        <h1>Iniciar sesión</h1>
+                        <h1>Inicio de sesión</h1>
 
                         <hr />
 

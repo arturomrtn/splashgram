@@ -1,0 +1,10 @@
+.signup-container {
+    height: 900px;
+    display: flex
+}
+
+.singup-container h1 {
+    display: flex;
+    text-align: center;
+
+}

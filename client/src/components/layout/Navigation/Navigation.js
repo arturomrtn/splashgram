@@ -41,30 +41,40 @@ class Navigation extends Component {
         return (
             <>
                 <Navbar bg='light' expand='lg'>
-                    <Navbar.Brand href='/'>SplashGram</Navbar.Brand>
+                    <Navbar.Brand to='/' as={Link}>SplashGram</Navbar.Brand>
                     <Navbar.Toggle aria-controls='basic-navbar-nav' />
                     <Navbar.Collapse id='basic-navbar-nav'>
                         <Nav className='mr-auto'>
-                            <Nav.Link to="/" as={Link}>Home</Nav.Link>
+                            <Nav.Link to="/" as={Link}>Inicio</Nav.Link>
+                            
+                            {this.props.loggedUser?
                             <Nav.Item>
+                               
+                                <Nav.Link to='/myalbums' as={Link}>Mis álbumes</Nav.Link>
 
-                                <Nav.Link to='/myalbums' as={Link}>My Albums</Nav.Link>
                             </Nav.Item>
+                            :
+                            ''}
                             <NavDropdown
-                                title={this.props.loggedUser ? 'Username' : 'User'}
+                                
+                                title={this.props.loggedUser ? this.props.loggedUser.username : 'Invitado'}
                                 id='basic-nav-dropdown'
                             >
                                 <NavDropdown.Item>
                                     <Link to='/mybio'>Bio</Link>
                                 </NavDropdown.Item>
                                 <NavDropdown.Item>
-                                    <Link to='/mybio'>Profile</Link>
+                                    <Link to='/mybio'>Perfil</Link>
                                 </NavDropdown.Item>
                                 <NavDropdown.Item onClick={()=>this.logOut()}>
-                                    Logout
+                                    Cerrar sesión
                                         </NavDropdown.Item>
                             </NavDropdown>
                         </Nav>
+                        {this.props.loggedUser?
+                        <Nav.Link as="span" onClick={()=>this.logOut()}>Cerrar sesión</Nav.Link> 
+                        
+                        :
                         <Nav>
                             <Link to='/signup'>
                                 <Nav.Link as='div'>Registro</Nav.Link>
@@ -73,8 +83,9 @@ class Navigation extends Component {
                                 <Nav.Link as='div'>Inicio de sesión</Nav.Link>
                             </Link>
 
-                        </Nav>
-                        {this.props.storeUser ? (
+                        </Nav>}
+
+                        {this.props.loggedUser ? (
                             <>
                             <Form inline onSubmit={e => this.onFormSubmit(e)}>
                                 <FormControl
@@ -92,7 +103,7 @@ class Navigation extends Component {
                                     search: `?queryString=${this.state.value}`,
                                     state: { fromDashboard: true }
                                 }}
-                                >Search</Link>
+                                >Búsqueda</Link>
                                 </>
                         ) : (
                             ''

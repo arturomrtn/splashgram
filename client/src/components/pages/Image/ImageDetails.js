@@ -1,6 +1,7 @@
 import React, { Component } from 'react'
 //import { Dropdown } from 'react-bootstrap'
 import AlbumService from '../../../service/album.service'
+import CommentForm from '../Comment/CommentForm'
 import './ImageDetails.css'
 
 class ImageDetails extends Component {
@@ -20,7 +21,7 @@ class ImageDetails extends Component {
 
         this.albumService
 
-            .getAlbumsByOwner(this.props.storeUser._id || '604378e1b1e00ba51c9408d1')
+            .getAlbumsByOwner(this.props.loggedUser._id || '604378e1b1e00ba51c9408d1')
             .then(response => {
                 this.setState({ albums: response.data })
             })
@@ -59,12 +60,15 @@ class ImageDetails extends Component {
                 <img src={link} width="100%" />
                 <p> Descripción: {description}</p>
                 <p> Autor: {author}</p>
+
+                <p>Selecciona un álbum:</p>
                 <select name="selectedAlbum" onChange={event => this.handleSelectChange(event)}>
                     {albums?.map( (elm, index) => {
                         return <option key={elm.name} value={index}>{elm.name}</option>
                     })}
                 </select>
-                <button onClick={() => this.handleAddToAlbum()}>Add to album</button>
+                <button onClick={() => this.handleAddToAlbum()}>Añadir a un álbum</button>
+                <CommentForm loggedUser={ this.props.loggedUser }/>
             </div>
         )
     }

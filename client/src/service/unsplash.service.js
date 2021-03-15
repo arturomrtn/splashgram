@@ -11,7 +11,7 @@ class UnsplashService {
 
     getRandomImages = () => {
         return  this.api
-                .get('photos/random?count=10')
+                .get('photos/random?count=15')
                 .then(resp => {
 
                     const linksArray = resp.data.map(image => {

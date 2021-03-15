@@ -1,5 +1,6 @@
 import { Component } from 'react'
 import AuthService from '../../../service/auth.service'
+import './SignUp.css'
 
 import { Form, Button, Container, Row, Col } from 'react-bootstrap'
 
@@ -38,13 +39,13 @@ class SignUp extends Component {
 
     render() {
         return (
-            <Container>
+            <Container fluid>
 
                 <Row>
 
-                    <Col md={{ span: 2, offset: 4 }}>
+                    <Col className="sign-up container align-items-center" md={{ span: 4, offset: 4 }}>
 
-                        <h1>Sign Up</h1>
+                        <h1>Registro de usuario</h1>
 
                         <hr />
 

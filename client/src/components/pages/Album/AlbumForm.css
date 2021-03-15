@@ -1,0 +1,19 @@
+.album-form {
+    margin-top: 50px;
+    display: flex;
+    justify-content: flex-start;
+    
+}
+
+.album-form label {
+    margin-left: 20px;
+}
+
+.album-form input {
+    margin-left: 20px;
+}
+
+.album-form button {
+    border-radius: 30px;
+    margin-left: 20px
+}

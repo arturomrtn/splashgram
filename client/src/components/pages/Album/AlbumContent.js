@@ -1,6 +1,7 @@
 import React, { Component } from 'react'
 import AlbumService from '../../../service/album.service'
 import { Link } from 'react-router-dom'
+import './AlbumContent.css'
 
 
 class AlbumContent extends Component {
@@ -23,7 +24,6 @@ class AlbumContent extends Component {
         this.albumService
         .getOneAlbum(params.get( 'id' ))
         .then(response => {
-            console.log( '*******', response )
             this.setState({ images: response.data.images })
         })
         .catch(err => console.log(err))
@@ -31,9 +31,8 @@ class AlbumContent extends Component {
     
 
     render() {
-        console.log( this.state.images )
         return (
-            <div>
+            <div className="album-content">
             {
                 this.state.images.map( image => (
                     <Link key={image.link} to={`/album-content?author=${ image.author }&link=${ image.link }&description=${ image.description }`} className="btn btn-dark"> 
@@ -42,8 +41,8 @@ class AlbumContent extends Component {
                             alt={image.description} 
                             width="200px"
                         />
-                        <p>{image.author}</p>
-                        <p>{image.description}</p>
+                        <p>Autor: {image.author}</p>
+                        <p>Descripción: {image.description}</p>
                         
                     </Link>
                 ))

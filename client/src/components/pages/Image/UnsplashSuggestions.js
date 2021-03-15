@@ -62,7 +62,7 @@ class UnsplashSuggestions extends Component {
                                 key={image.link} 
                                 src= {image.link} 
                                 alt={image.description} 
-                                width="200px"
+                                width="250px"
                             />
                         </Link>
                     ))

@@ -7,15 +7,15 @@ import Login from '../pages/auth/LoginForm'
 import UnsplashSuggestions from '../pages/Image/UnsplashSuggestions'
 import AlbumContent from '../pages/Album/AlbumContent'
 
-const Routes = ({storeUser}) => {
+const Routes = ({loggedUser, storeUser}) => {
 
     return (
         <Switch>
             <Route path="/" exact render={ props => <UnsplashSuggestions storeUser={storeUser} {...props} key={new Date(Date.now()).toISOString()}/>} />
-            <Route path="/image-details" render={props => <ImageDetails storeUser={storeUser} {...props} />} />
-            <Route path="/signup" render={props => <SignUp storeUser={storeUser}  {...props} />} />
-            <Route path="/login" render={props => <Login storeUser={storeUser} {...props} />} />
-            <Route path="/myalbums" render={props => <Album storeUser={storeUser} /> } />
+            <Route path="/image-details" render={props => <ImageDetails loggedUser={loggedUser} {...props} />} />
+            <Route path="/signup" render={props => <SignUp storeUser={storeUser} loggedUser={loggedUser} {...props} />} />
+            <Route path="/login" render={props => <Login storeUser={storeUser} loggedUser={loggedUser}{...props} />} />
+            <Route path="/myalbums" render={props => <Album storeUser={storeUser} loggedUser={loggedUser}/> } />
             <Route path="/myalbums-content" render={props => <AlbumContent storeUser={storeUser} {...props} /> } />
 
         </Switch>
