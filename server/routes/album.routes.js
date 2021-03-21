@@ -30,7 +30,7 @@ router.get('/getOneAlbum/:album_id', (req, res) => {
 
 router.get('/getAlbumsByOwner/:user_id', (req, res) => {
 
-    console.log( req.params )
+    console.log( '---------', req.params )
 
     Album
         .find({ userId: req.params.user_id })

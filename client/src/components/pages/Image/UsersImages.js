@@ -1,50 +1,24 @@
 import React, { Component } from 'react'
-import UnsplashService from '../../../service/unsplash.service'
 import { Link } from 'react-router-dom'
-import './UnsplashSuggestions.css'
+import ImageService from '../../../service/image.service'
 
-class UnsplashSuggestions extends Component {
+class UsersImages extends Component {
 
     constructor() {
         super()
         this.state = {
             images: []
         }
-        this.unsplashService = new UnsplashService()
+        this.imageService = new ImageService()
     }
 
  
     componentDidMount() {
-        
-        const query = this.getQuery()
-
-        if ( query ) {
-             this.unsplashService
-            .searchImages(query)
-            .then(images => {
-                this.setState({
-                    images: images
-                })
-            })
-            
-        }
-        else {
-            this.unsplashService
-            .getRandomImages()
-            .then(images => {
-                this.setState({
-                    images: images
-                })
-            })
-        }
+        this.imageService.getAllImages().then(
+            response => this.setState({images: response.data}) 
+        )
     }
 
-    getQuery() {
-        const { location } = this.props
-
-        const params = new URLSearchParams(location.search)
-        return params.get('queryString')
-    }
 
     render(){
 
@@ -70,5 +44,4 @@ class UnsplashSuggestions extends Component {
     }
 }
 
-export default UnsplashSuggestions
-
+export default UsersImages

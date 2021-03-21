@@ -42,7 +42,7 @@ class Album extends Component {
         return (
             <div className="my-albums">
                 <h1>Mis álbumes</h1>
-                 <AlbumForm storeUser={this.props.storeUser} onNewAlbum={ ()=> this.refreshAlbums()}/>
+                 <AlbumForm loggedUser={this.props.loggedUser} onNewAlbum={ ()=> this.refreshAlbums()}/>
                  <AlbumsList albums={this.state.albums}/>
             </div>
         )

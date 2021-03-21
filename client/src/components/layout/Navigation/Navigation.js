@@ -37,7 +37,6 @@ class Navigation extends Component {
 
     render() {
 
-        
         return (
             <>
                 <Navbar bg='light' expand='lg'>
@@ -48,11 +47,19 @@ class Navigation extends Component {
                             <Nav.Link to="/" as={Link}>Inicio</Nav.Link>
                             
                             {this.props.loggedUser?
+                             <>
                             <Nav.Item>
                                
                                 <Nav.Link to='/myalbums' as={Link}>Mis álbumes</Nav.Link>
 
                             </Nav.Item>
+                            <Nav.Item>
+                               
+                            <Nav.Link to='/users-images' as={Link}>Explorar</Nav.Link>
+
+                        </Nav.Item>
+                             </>
+
                             :
                             ''}
                             <NavDropdown

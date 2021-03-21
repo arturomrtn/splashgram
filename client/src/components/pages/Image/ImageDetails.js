@@ -21,9 +21,12 @@ class ImageDetails extends Component {
 
         this.albumService
 
-            .getAlbumsByOwner(this.props.loggedUser._id || '604378e1b1e00ba51c9408d1')
+            .getAlbumsByOwner(this.props.loggedUser?._id)
+            //'604378e1b1e00ba51c9408d1'
             .then(response => {
-                this.setState({ albums: response.data })
+                this.setState({ 
+                    selectedAlbum: {},
+                    albums: response.data })
             })
             .catch(err => console.log(err))
     }
@@ -33,7 +36,7 @@ class ImageDetails extends Component {
     }
 
     handleAddToAlbum() {
-        if ( !this.state.selectedAlbum.images ) this.state.selectedAlbum.images = []
+        if ( !this.state.selectedAlbum?.images ) this.state.selectedAlbum.images = []
         this.state.selectedAlbum.images.push( this.getSelectedImage())
         // this.albumService.editAlbum(this.state.selectedAlbum._id, this.state.selectedAlbum)
         this.albumService.addImageToAlbum( this.state.selectedAlbum._id, this.state.selectedAlbum, this.getSelectedImage() )
@@ -62,13 +65,13 @@ class ImageDetails extends Component {
                 <p> Autor: {author}</p>
 
                 <p>Selecciona un álbum:</p>
-                <select name="selectedAlbum" onChange={event => this.handleSelectChange(event)}>
+                <select name="selectedAlbum" value="0" onChange={event => this.handleSelectChange(event)}>
                     {albums?.map( (elm, index) => {
                         return <option key={elm.name} value={index}>{elm.name}</option>
                     })}
                 </select>
                 <button onClick={() => this.handleAddToAlbum()}>Añadir a un álbum</button>
-                <CommentForm loggedUser={ this.props.loggedUser }/>
+                <CommentForm/>
             </div>
         )
     }
