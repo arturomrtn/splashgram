@@ -33,6 +33,13 @@ class Album extends Component {
             .catch(err => console.log(err))
     }
     
+    //Borrar album
+    deleteAlbum(albumId) {
+        this.albumService
+            .deleteAlbum(albumId)
+            .then(response => this.refreshAlbums())
+            .catch(err => console.log(err))
+    }
 
     render() {
         
@@ -43,7 +50,7 @@ class Album extends Component {
             <div className="my-albums">
                 <h1>Mis álbumes</h1>
                  <AlbumForm loggedUser={this.props.loggedUser} onNewAlbum={ ()=> this.refreshAlbums()}/>
-                 <AlbumsList albums={this.state.albums}/>
+                 <AlbumsList albums={this.state.albums} deleteAlbum={(albumId) => this.deleteAlbum(albumId)}/>
             </div>
         )
     }

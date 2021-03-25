@@ -6,7 +6,7 @@ const bcrypt = require("bcrypt")
 const User = require("../models/user.model")
 
 router.post('/signup', (req, res) =>{
-    const {username, password, lastname, firstname } = req.body
+    const {username, password, lastname, firstname, bio } = req.body
 
     if (!username || !password) {
         res.status(400).json({ message: 'Rellena todos los campos' })
@@ -30,7 +30,7 @@ router.post('/signup', (req, res) =>{
             const hashPass = bcrypt.hashSync(password, salt)
 
             User
-                .create({ username, password: hashPass, lastname, firstname })
+                .create({ username, password: hashPass, lastname, firstname, bio })
                 .then(newUser => req.login(newUser, err => err ? res.status(500).json({ message: 'Error de inicio de sesión' }) : res.status(200).json(newUser)))
                 .catch((error) => res.status(500).json({ message: 'Error guardando el usuario a la BD', originalMessage: error }))
         })
@@ -62,6 +62,27 @@ router.post('/logout', (req, res) => {
 
 
 router.get('/loggedin', (req, res) => req.isAuthenticated() ? res.status(200).json(req.user) : res.status(403).json({ message: 'No Autorizado' }))
+
+//Update User
+router.put('/updateUser', (req, res) => {
+
+
+    User
+        .findByIdAndUpdate(req.query.user_Id, req.body)
+        .then(updatedUser => res.json(updatedUser))
+        .catch(err => res.status(500).json(err))
+
+})
+//Delete User
+router.get('/deleteUser', (req, res) => {
+
+
+    User
+        .findByIdAndDelete(req.query.user_Id)
+        .then(updatedUser => res.json(updatedUser))
+        .catch(err => res.status(500).json(err))
+
+})
 
 
 module.exports = router

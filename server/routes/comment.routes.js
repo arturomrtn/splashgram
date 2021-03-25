@@ -29,6 +29,14 @@ router.get('/getAllComments', (req, res) => {
         .catch(err => res.status(500).json({ code: 500, message: 'Error fetching comments', err }))
 })
 
+router.get('/getAllCommentsFromImage/:image_id', (req, res) => {
+
+    Comment
+        .find({ imageId: req.params.image_id})
+        .then(response => res.json(response))
+        .catch(err => res.status(500).json({ code: 500, message: 'Error fetching comments from the image', err }))
+})
+
 router.put('/editComment/:comment_id', (req, res) => {
 
     Comment

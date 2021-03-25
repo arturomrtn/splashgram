@@ -7,6 +7,7 @@ import Login from '../pages/auth/LoginForm'
 import UnsplashSuggestions from '../pages/Image/UnsplashSuggestions'
 import AlbumContent from '../pages/Album/AlbumContent'
 import UsersImages from '../pages/Image/UsersImages'
+import UserProfile from '../pages/auth/UserProfile'
 
 const Routes = ({loggedUser, storeUser}) => {
 
@@ -19,6 +20,8 @@ const Routes = ({loggedUser, storeUser}) => {
             <Route path="/myalbums" render={props => <Album storeUser={storeUser} loggedUser={loggedUser}/> } />
             <Route path="/myalbums-content" render={props => <AlbumContent loggedUser={loggedUser} {...props} /> } />
             <Route path="/users-images" render={props => <UsersImages loggedUser={loggedUser} {...props} /> } />
+            <Route path="/user-profile" render={props => <UserProfile loggedUser={loggedUser} {...props} /> } />
+
         </Switch>
 
     )

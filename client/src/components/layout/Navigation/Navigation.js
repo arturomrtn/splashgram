@@ -68,10 +68,7 @@ class Navigation extends Component {
                                 id='basic-nav-dropdown'
                             >
                                 <NavDropdown.Item>
-                                    <Link to='/mybio'>Bio</Link>
-                                </NavDropdown.Item>
-                                <NavDropdown.Item>
-                                    <Link to='/mybio'>Perfil</Link>
+                                    <Link to='/user-profile'>Perfil</Link>
                                 </NavDropdown.Item>
                                 <NavDropdown.Item onClick={()=>this.logOut()}>
                                     Cerrar sesión

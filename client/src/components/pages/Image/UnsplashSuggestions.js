@@ -49,13 +49,13 @@ class UnsplashSuggestions extends Component {
     render(){
 
         const {images} = this.state
-
-
+        const idUrlParam = image => image._id? `id=${image._id}&` : ''
+ 
         return(
             <div className='unsplash-suggestions'>
                 {
                     images.map( image => (
-                        <Link to={`/image-details?author=${ image.author }&link=${ image.link }&description=${ image.description }`} className="btn btn-dark"> 
+                        <Link to={`/image-details?${idUrlParam(image)}author=${ image.author }&link=${ image.link }&description=${ image.description }`} className="btn btn-dark"> 
                             <img 
                                 key={image.link} 
                                 src= {image.link} 

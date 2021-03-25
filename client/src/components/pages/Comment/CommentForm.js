@@ -1,5 +1,5 @@
 import React, { Component } from 'react'
-import CommentService from '../../../service/album.service'
+import CommentService from '../../../service/comment.service'
 
 class CommentForm extends Component {
     constructor(props) {
@@ -8,11 +8,26 @@ class CommentForm extends Component {
         this.state = {
             
             body: '',
+            comments: []
             
         }
 
         this.commentService = new CommentService()
     }
+
+    componentDidMount() {
+       
+        this.commentService
+
+         .getAllCommentsFromImage(this.props.imageId).then( response => {
+            console.log( response.data )
+
+            this.setState({
+                comments: response.data
+            })
+         })
+    } 
+
 
     handleInputChange(e) {
         const { name, value } = e.target
@@ -31,7 +46,8 @@ class CommentForm extends Component {
                     body: ''
                 })
             })
-            .catch(err => this.props.handleAlert(true, 'Error', err.response.data.message))
+            .catch(err => console.error( 'Error', err.response.data.message))
+
     }
 
     render() {
@@ -40,6 +56,11 @@ class CommentForm extends Component {
                 
                     <input type="text" name="body" onChange={e => this.handleInputChange(e)}/>
                     <button onClick={()=>this.handleSubmit()}> Añadir comentario </button>
+                    {
+                        this.state.comments?.map( comment => (
+                            <p>{ comment.body }</p>
+                        ))
+                    }
                 
             </div>
         )

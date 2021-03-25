@@ -7,12 +7,12 @@ const Image = require("../models/Image.model")
 router.post('/newAlbum', (req, res) => {
     console.log(req.body)
 
-    const album  = { ...req.body }
+    const album = { ...req.body }
 
     Album
-    .create(album)
-    .then(response => res.json(response))
-    .catch(err => res.status(500).json({ code: 500, message: 'Error saving coasters', err }))
+        .create(album)
+        .then(response => res.json(response))
+        .catch(err => res.status(500).json({ code: 500, message: 'Error saving coasters', err }))
 })
 
 
@@ -30,7 +30,7 @@ router.get('/getOneAlbum/:album_id', (req, res) => {
 
 router.get('/getAlbumsByOwner/:user_id', (req, res) => {
 
-    console.log( '---------', req.params )
+    console.log('---------', req.params)
 
     Album
         .find({ userId: req.params.user_id })
@@ -61,25 +61,43 @@ router.put('/editAlbum/:album_id', (req, res) => {
 
 router.put('/addImageToAlbum/:album_id', (req, res) => {
     console.log(req.params.album_id, req.body.albumDetails, req.body.image)
+    const { albumDetails, image } = req.body
 
-    Image.create(req.body.image).then((newImage)=>{   
-        
-        const idToPush = newImage._id
+    let updatePromise = new Promise( resolve => {
 
-     
-        Album.findByIdAndUpdate(
-            req.params.album_id, 
-            { $push: { images: newImage._id } }
+        if ( !image._id ) {
+            delete image._id
+            Image.create(image).then((newImage) => {
+                console.log( 'id de newImage', newImage._id)
+                const updatedAlbum = replaceUndefinedImageId( newImage._id, albumDetails )
+                console.log('newAlbum', updatedAlbum )
+                updateAlbum( updatedAlbum, newImage._id ).then( album => resolve (album))
+            }).catch(err => console.log(err, "falla img"))
+        }    
+        else {
+            updateAlbum( albumDetails, image._id ).then( album => resolve( album ))
+        }
+    })
 
-        )
-        .then(response => res.json(response))
-        .catch(err => console.log(err => "falla actualizar album"))
-        .catch(err => res.status(500).json({ code: 500, message: 'Error adding image to album', err }))
-    }).catch(err => console.log(err, "falla img"))
-   
+    updatePromise.then(response => res.json(response))
+                .catch(err => console.log(err => "falla actualizar album"))
+                .catch(err => res.status(500).json({ code: 500, message: 'Error adding image to album', err }))
 
- 
 })
+
+function replaceUndefinedImageId( newId, album ) {
+    const nullIdImage = album.images.find( image => !image._id )
+    nullIdImage._id = newId
+
+    return album
+}
+
+function updateAlbum( album, newImageId ) {
+    return Album.findByIdAndUpdate(
+        album._id,
+        { $push: { images: newImageId } }
+    )
+}
 
 router.delete('/deleteAlbum/:album_id', (req, res) => {
 

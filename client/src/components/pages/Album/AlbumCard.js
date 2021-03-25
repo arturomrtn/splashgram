@@ -1,11 +1,11 @@
 import React from 'react'
-import { Card } from 'react-bootstrap'
+import { Card, Button } from 'react-bootstrap'
 import { Link } from 'react-router-dom'
 import PhotoAlbum from '../../../images/photoalbum.png'
 import './AlbumCard.css'
 
 
- const AlbumCard = ({name, description, _id}) => {
+ const AlbumCard = ({name, description, _id, deleteAlbum}) => {
 
 
         return (
@@ -18,6 +18,7 @@ import './AlbumCard.css'
                                     {description}
                                 </Card.Text>
                                 <Link to={`myalbums-content/?id=${_id}`} variant="primary">Abrir álbum</Link>
+                                <Button onClick={() => deleteAlbum(_id)} className="btn btn-info">Borrar álbum</Button>
                             </Card.Body>
                         </Card>
                     
