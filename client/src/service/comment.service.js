@@ -14,6 +14,7 @@ class CommentService {
     editComment = (commentId, commentDetails) => this.api.put(`/editComment/${commentId}`, commentDetails)
     deleteComment = (commentId) => this.api.delete(`/deleteComment/${commentId}`)
     getAllCommentsFromImage = (imageId) => this.api.get(`/getAllCommentsFromImage/${imageId}`)
+    addCommentToImage = (image) => this.api.post(`/addCommentToImage`, image )
 }
 
 export default CommentService

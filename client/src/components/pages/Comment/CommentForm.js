@@ -1,5 +1,7 @@
 import React, { Component } from 'react'
 import CommentService from '../../../service/comment.service'
+import '../Comment/CommentForm.css'
+import { Card } from 'react-bootstrap'
 
 class CommentForm extends Component {
     constructor(props) {
@@ -67,18 +69,20 @@ class CommentForm extends Component {
 
     render() {
         return (
-            <div>
+            <div className="comment">
                 
                     <input type="text" name="body" value={this.state.body} onChange={e => this.handleInputChange(e)}/>
                     <button onClick={()=>this.createComment()}> 
                         Añadir comentario 
                     </button>
+                    <div className="comment-body">
                     {
                         this.props.image?.comments?.map( comment => (
+
                             <p>{ comment.body }</p>
                         ))
                     }
-                
+                </div>
             </div>
         )
     }
