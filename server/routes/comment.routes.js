@@ -3,11 +3,9 @@ const router = express.Router()
 const Comment = require("../models/Comment.model")
 
 router.post('/newComment', (req, res) => {
-    
-    const {userId, body} = req.body
-
+    console.log( req.body )
     Comment
-        .create({userId, body})
+        .create(req.body)
         .then(response => res.json(response))
         .catch(err => res.status(500).json({ code: 500, message: 'Error saving comment', err }))
 })

@@ -10,8 +10,7 @@ class ImageDetails extends Component {
         this.state = {
             albums: [],
             image: null,
-            selectedAlbum: {}
-
+            selectedAlbum: {},
         }
 
         this.albumService = new AlbumService()
@@ -26,7 +25,9 @@ class ImageDetails extends Component {
             .then(response => {
                 this.setState({ 
                     selectedAlbum: response.data[0],
-                    albums: response.data })
+                    albums: response.data,
+                    image: this.getSelectedImage()
+                })
             })
             .catch(err => console.log(err))
     }
@@ -37,10 +38,10 @@ class ImageDetails extends Component {
 
     handleAddToAlbum() {
         if ( !this.state.selectedAlbum?.images ) this.state.selectedAlbum.images = []
-        this.state.selectedAlbum.images.push( this.getSelectedImage())
+        this.state.selectedAlbum.images.push( this.state.image )
         console.log('-------------+++++++++++++++++++++++++++', this.state.selectedAlbum)
         // this.albumService.editAlbum(this.state.selectedAlbum._id, this.state.selectedAlbum)
-        this.albumService.addImageToAlbum( this.state.selectedAlbum._id, this.state.selectedAlbum, this.getSelectedImage() )
+        this.albumService.addImageToAlbum( this.state.selectedAlbum._id, this.state.selectedAlbum, this.state.image )
     }
 
     getSelectedImage() {
@@ -50,20 +51,30 @@ class ImageDetails extends Component {
             _id: params.get('id'),
             link: params.get('link'),
             description: params.get('description'),
-            author: params.get('author')
+            author: params.get('author'),
+            comments: []
         }
 
     }
 
+    addComment( comment ) {
+        this.setState( prevState => {
+            console.log( prevState.image )
+            prevState.image.comments.push( comment )
+
+            return ({ image: {...prevState.image } })
+        })
+    }
+
     render() {
-        const { albums, selectedAlbum } = this.state
-        const { link, author, description, _id } = this.getSelectedImage()
+        const { albums, selectedAlbum, image } = this.state
+        console.log( '------', image )
         return (
             <div className="image-details">
 
-                <img src={link} width="100%" />
-                <p> Descripción: {description}</p>
-                <p> Autor: {author}</p>
+                <img src={image?.link} width="100%" />
+                <p> Descripción: {image?.description}</p>
+                <p> Autor: {image?.author}</p>
                  
                 <p>Selecciona un álbum:</p>
                 <select name="selectedAlbum" value={ selectedAlbum?.name || '' } onChange={event => this.handleSelectChange(event)}>
@@ -71,14 +82,8 @@ class ImageDetails extends Component {
                         return <option key={index} value={elm.name}>{elm.name}</option>
                     })}
                 </select>
-                {/*<p>Selecciona un álbum:</p>
-                <select name="selectedAlbum" value="0" onChange={event => this.handleSelectChange(event)}>
-                    {albums?.map( (elm, index) => {
-                        return <option key={elm.name} value={index}>{elm.name}</option>
-                    })}
-                </select>*/}
+                <CommentForm image={ image } loggedUser={this.props.loggedUser} onCreateComment={ comment => this.addComment( comment )}/>
                 <button onClick={() => this.handleAddToAlbum()}>Añadir a un álbum</button>
-                {/*<CommentForm imageId={ _id } loggedUser={this.props.loggedUser}/>*/}
             </div>
         )
     }

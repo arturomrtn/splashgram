@@ -8,56 +8,73 @@ class CommentForm extends Component {
         this.state = {
             
             body: '',
-            comments: []
+//            comments: []
             
         }
 
-        this.commentService = new CommentService()
+//        this.commentService = new CommentService()
     }
-
+/*
     componentDidMount() {
        
+        this.refreshComments()
+    } 
+
+    refreshComments() {
+        const {imageId} = this.props
+        if ( !imageId ) return
+
         this.commentService
 
-         .getAllCommentsFromImage(this.props.imageId).then( response => {
+         .getAllCommentsFromImage().then( response => {
             console.log( response.data )
 
             this.setState({
                 comments: response.data
             })
          })
-    } 
-
-
+    }
+*/
     handleInputChange(e) {
         const { name, value } = e.target
         this.setState({ [name]: value })
     }
 
-    handleSubmit() {
-
-            this.commentService
+    createComment() {
+        this.props.onCreateComment({
+            userId: this.props.loggedUser._id,
+            body: this.state.body,
+            imageId: this.props.imageId
+        })
+        this.setState({
+            body: ''
+        })
+ /*           this.commentService
             .createComment({
                 userId: this.props.loggedUser._id,
-                body: this.state.body
+                body: this.state.body,
+                imageId: this.props.imageId
             })
             .then(response => {
+                this.refreshComments()
                 this.setState({
                     body: ''
                 })
             })
             .catch(err => console.error( 'Error', err.response.data.message))
-
+*/
     }
 
     render() {
         return (
             <div>
                 
-                    <input type="text" name="body" onChange={e => this.handleInputChange(e)}/>
-                    <button onClick={()=>this.handleSubmit()}> Añadir comentario </button>
+                    <input type="text" name="body" value={this.state.body} onChange={e => this.handleInputChange(e)}/>
+                    <button onClick={()=>this.createComment()}> 
+                        Añadir comentario 
+                    </button>
                     {
-                        this.state.comments?.map( comment => (
+                        this.props.image?.comments?.map( comment => (
                             <p>{ comment.body }</p>
                         ))
                     }

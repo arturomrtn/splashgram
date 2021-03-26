@@ -5,9 +5,7 @@ const Image = require("../models/Image.model")
 
 
 router.post('/newAlbum', (req, res) => {
-    console.log(req.body)
-
-    const album = { ...req.body }
+   const album = { ...req.body }
 
     Album
         .create(album)
@@ -30,7 +28,6 @@ router.get('/getOneAlbum/:album_id', (req, res) => {
 
 router.get('/getAlbumsByOwner/:user_id', (req, res) => {
 
-    console.log('---------', req.params)
 
     Album
         .find({ userId: req.params.user_id })
@@ -48,10 +45,7 @@ router.get('/getAllAlbums', (req, res) => {
 
 
 router.put('/editAlbum/:album_id', (req, res) => {
-    console.log(req.body, req.params)
 
-    //Image.create()
-    //usar el id para editar el album
     Album
         .findByIdAndUpdate(req.params.album_id, req.body)
         .then(response => res.json(response))
@@ -60,7 +54,7 @@ router.put('/editAlbum/:album_id', (req, res) => {
 })
 
 router.put('/addImageToAlbum/:album_id', (req, res) => {
-    console.log(req.params.album_id, req.body.albumDetails, req.body.image)
+
     const { albumDetails, image } = req.body
 
     let updatePromise = new Promise( resolve => {
@@ -68,9 +62,9 @@ router.put('/addImageToAlbum/:album_id', (req, res) => {
         if ( !image._id ) {
             delete image._id
             Image.create(image).then((newImage) => {
-                console.log( 'id de newImage', newImage._id)
+               
                 const updatedAlbum = replaceUndefinedImageId( newImage._id, albumDetails )
-                console.log('newAlbum', updatedAlbum )
+
                 updateAlbum( updatedAlbum, newImage._id ).then( album => resolve (album))
             }).catch(err => console.log(err, "falla img"))
         }    
