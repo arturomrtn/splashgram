@@ -35,7 +35,7 @@ class AlbumContent extends Component {
             <div className="album-content">
             {
                 this.state.images.map( image => (
-                    <Link key={image.link} to={`/album-content?author=${ image.author }&link=${ image.link }&description=${ image.description }`} className="btn btn-dark"> 
+                    <Link key={image.link} to={`/image-details?id=${image._id}&author=${ image.author }&link=${ image.link }&description=${ image.description }`} className="btn btn-dark"> 
                         <img 
                             src= {image.link} 
                             alt={image.description} 

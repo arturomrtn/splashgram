@@ -57,25 +57,32 @@ router.put('/addImageToAlbum/:album_id', (req, res) => {
 
     const { albumDetails, image } = req.body
 
-    let updatePromise = new Promise( resolve => {
+    // let updatePromise = new Promise( resolve => {
 
         if ( !image._id ) {
             delete image._id
+            image.comments = image.comments.map( comment => comment._id )
             Image.create(image).then((newImage) => {
                
                 const updatedAlbum = replaceUndefinedImageId( newImage._id, albumDetails )
-
-                updateAlbum( updatedAlbum, newImage._id ).then( album => resolve (album))
-            }).catch(err => console.log(err, "falla img"))
+                updateAlbum( updatedAlbum, newImage._id ).then( () => {
+                    console.log('newImage', newImage._id)
+                    res.json( newImage )
+//                    resolve (newImage)
+                }).catch(err => console.log(err, "falla img"))
+            })
         }    
         else {
-            updateAlbum( albumDetails, image._id ).then( album => resolve( album ))
+            updateAlbum( albumDetails, image._id ).then( () => {
+                res.json( image )
+//                resolve( image )
+            })
         }
-    })
+    // })
 
-    updatePromise.then(response => res.json(response))
-                .catch(err => console.log(err => "falla actualizar album"))
-                .catch(err => res.status(500).json({ code: 500, message: 'Error adding image to album', err }))
+    // updatePromise.then(response => res.json(response))
+    //             .catch(err => console.log(err => "falla actualizar album"))
+    //             .catch(err => res.status(500).json({ code: 500, message: 'Error adding image to album', err }))
 
 })
 

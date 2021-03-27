@@ -1,5 +1,6 @@
 import React, { Component } from 'react'
 import CommentService from '../../../service/comment.service'
+import AuthService from '../../../service/auth.service'
 import '../Comment/CommentForm.css'
 import { Card } from 'react-bootstrap'
 
@@ -11,7 +12,6 @@ class CommentForm extends Component {
             
             body: '',
 //            comments: []
-            
         }
 
 //        this.commentService = new CommentService()
@@ -76,10 +76,12 @@ class CommentForm extends Component {
                         Añadir comentario 
                     </button>
                     <div className="comment-body">
+                        <strong>Comentarios:</strong>
                     {
                         this.props.image?.comments?.map( comment => (
+                            
+                            <CommentCard comment={ comment } />
 
-                            <p>{ comment.body }</p>
                         ))
                     }
                 </div>
@@ -87,5 +89,42 @@ class CommentForm extends Component {
         )
     }
 }
+
+class CommentCard extends Component {
+
+    constructor( props ) {
+        super( props )
+
+        this.state = {
+
+         username: '',
+
+        }
+
+        this.authService = new AuthService()
+    }
+
+    componentDidMount() {
+        this.authService.getUser(this.props.comment.userId)
+        .then( resp => {
+            const user = resp.data
+            this.setState({username: user.username})    
+        })
+    }
+
+
+    render() {
+        const { comment } = this.props
+
+        return (
+            <>
+                <p>{ comment.body }</p>
+                <p>@{ this.state.username }</p>
+            </>
+        )
+    }
+
+}
+
 
 export default CommentForm

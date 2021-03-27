@@ -3,7 +3,6 @@ import 'dotenv/config'
 import './App.css';
 import AuthService from '../service/auth.service'
 import Navigation from './layout/Navigation/Navigation'
-//import { Switch, Route } from 'react-router-dom'
 import Routes from './routes/Routes'
 import '../components/layout/Footer.css'
 
@@ -15,7 +14,7 @@ export default class App extends Component {
     super()
     this.state = {
       loggedUser: undefined,
-      //searchText
+
     }
     this.authService = new AuthService()
   }

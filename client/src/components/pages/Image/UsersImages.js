@@ -29,7 +29,7 @@ class UsersImages extends Component {
             <div className='unsplash-suggestions'>
                 {
                     images.map( image => (
-                        <Link to={`/image-details?author=${ image.author }&link=${ image.link }&description=${ image.description }`} className="btn btn-dark"> 
+                        <Link to={`/image-details?id=${image._id}&author=${ image.author }&link=${ image.link }&description=${ image.description }`} className="btn btn-dark"> 
                             <img 
                                 key={image.link} 
                                 src= {image.link} 

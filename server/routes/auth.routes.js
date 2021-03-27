@@ -63,17 +63,26 @@ router.post('/logout', (req, res) => {
 
 router.get('/loggedin', (req, res) => req.isAuthenticated() ? res.status(200).json(req.user) : res.status(403).json({ message: 'No Autorizado' }))
 
-//Update User
-router.put('/updateUser', (req, res) => {
+router.get('/getUser/:user_id', (req, res) => {
+  
+    User
+        .findById(req.params.user_id)   
+        .then(user => res.json(user))
+        .catch(err => res.status(404).json(err))
 
+})
+
+
+router.put('/updateUser', (req, res) => {
+    const user = req.body
 
     User
-        .findByIdAndUpdate(req.query.user_Id, req.body)
+        .findByIdAndUpdate(user._id, user)
         .then(updatedUser => res.json(updatedUser))
         .catch(err => res.status(500).json(err))
 
 })
-//Delete User
+
 router.get('/deleteUser', (req, res) => {
 
 

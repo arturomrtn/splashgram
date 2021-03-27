@@ -2,6 +2,7 @@ const express = require("express")
 const router = express.Router()
 const Comment = require("../models/Comment.model")
 const Image = require("../models/Image.model")
+const { checkMongoId } = require("../middlewares")
 
 router.post('/newComment', (req, res) => {
     console.log( req.body )
@@ -12,10 +13,10 @@ router.post('/newComment', (req, res) => {
 })
 
 
-router.get('/getOneComment/:comment_id', (req, res) => {
+router.get('/getOneComment/:id', checkMongoId, (req, res) => {
 
     Comment
-        .findById(req.params.comment_id)
+        .findById(req.params.id)
         .then(response => res.json(response))
         .catch(err => res.status(500).json({ code: 500, message: 'Error fetching comment', err }))
 })
@@ -61,33 +62,22 @@ router.post('/addCommentToImage', async (req, res) => {
         comment._id = savedComment._id
     }))
     await Promise.all( promiseArray ).then( ()=> {
-        image.comments = image.comments.map( comment => comment.id )
+        image.comments = image.comments.map( comment => comment._id )
     })
 
-    return new Promise( resolve =>{
-        if (!image._id) { 
-            Image
-                .create( image )
-                .then( (savedImage)=>{
-                    console.log( savedImage )
-                })
-        } else {
-            const promiseArray = []
-            image.comments.forEach( comment =>{
-                if( !comment._id ) {
-                    promiseArray.push( Comment.create( comment ) )
-                }
+    if (!image._id) { 
+        delete image._id
+        Image
+            .create( image )
+            .then( (savedImage)=>{
+                console.log( 'savedImage', savedImage )
+                res.json( savedImage )
             })
-            Promise.all( promiseArray ).then( ()=>{
-                res.json( image )
-                resolve( image )
-            })
-        }
-
-    })
-}
-
-)
+    } else {
+        Image.findByIdAndUpdate( image._id, image )
+            .then( newImage => res.json( newImage ))
+    }
+})
 
 
 module.exports = router

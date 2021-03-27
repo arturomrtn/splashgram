@@ -12,6 +12,8 @@ class AuthService {
     signUp = userData => this.api.post('/signUp', userData)
     logOut = () => this.api.post('/logout')
     isLoggedIn = () => this.api.get('/loggedin')
+    getUser = (user_id) => this.api.get(`/getUser/${user_id}`)
+    updateUser = (user) => this.api.put(`/updateUser`, user)
 }
 
 export default AuthService

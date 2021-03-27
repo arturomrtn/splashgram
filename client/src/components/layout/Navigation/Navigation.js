@@ -21,7 +21,6 @@ class Navigation extends Component {
             .then((res) => {
                 this.props.storeUser(undefined);
 
-                //this.props.history.push('/');
             })
             .catch((err) => console.log(err));
     }

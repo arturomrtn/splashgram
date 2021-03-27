@@ -25,15 +25,12 @@ class Album extends Component {
     refreshAlbums() {
         this.albumService
             .getAlbumsByOwner(this.props.loggedUser._id)
-            //.getAlbumsByOwner('604378e1b1e00ba51c9408d1')
             .then(response => {
-                console.log( '*******', response )
                 this.setState({ albums: response.data })
             })
             .catch(err => console.log(err))
     }
     
-    //Borrar album
     deleteAlbum(albumId) {
         this.albumService
             .deleteAlbum(albumId)

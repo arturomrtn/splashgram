@@ -17,7 +17,7 @@ router.post('/newImage', (req, res) => {
 router.get('/getOneImage/:image_id', (req, res) => {
 
     Image
-        .findById(req.params.image_id)
+        .findById(req.params.image_id).populate('comments')
         .then(response => res.json(response))
         .catch(err => res.status(500).json({ code: 500, message: 'Error fetching image', err }))
 })
