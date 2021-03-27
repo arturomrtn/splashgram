@@ -42,10 +42,10 @@ class ImageDetails extends Component {
     handleAddToAlbum() {
         if (!this.state.selectedAlbum?.images) this.state.selectedAlbum.images = []
         this.state.selectedAlbum.images.push(this.state.image)
-        this.albumService.addImageToAlbum(this.state.selectedAlbum._id, this.state.selectedAlbum, this.state.image).then( resp => {
+        this.albumService.addImageToAlbum(this.state.selectedAlbum._id, this.state.selectedAlbum, this.state.image).then(resp => {
             const newImage = resp.data
             console.log('savedImage', newImage)
-            this.setState( prevState => ({
+            this.setState(prevState => ({
                 image: { ...prevState.image, _id: newImage._id }
             }))
         })
@@ -56,9 +56,9 @@ class ImageDetails extends Component {
         const params = new URLSearchParams(location.search)
 
         const imageId = params.get('id')
-        if ( imageId ) {
-            this.imageService.getOneImage( imageId ).then( resp => {
-                console.log( 'selectedImage', resp.data )
+        if (imageId) {
+            this.imageService.getOneImage(imageId).then(resp => {
+                console.log('selectedImage', resp.data)
                 this.setState({ image: resp.data })
             })
         }
@@ -75,16 +75,16 @@ class ImageDetails extends Component {
     }
 
     addComment(comment) {
-        console.log('new comment', comment, this.state.image )
+        console.log('new comment', comment, this.state.image)
 
         this.state.image.comments.push(comment)
-        this.commentService.addCommentToImage(this.state.image).then( resp =>{
+        this.commentService.addCommentToImage(this.state.image).then(resp => {
             const savedImage = resp.data
             console.log('savedImage', savedImage._id)
-            this.setState(prevState => ({ 
-                image: { ...prevState.image, _id: savedImage._id } 
+            this.setState(prevState => ({
+                image: { ...prevState.image, _id: savedImage._id }
             }))
-        }).catch( error => console.error( error ))
+        }).catch(error => console.error(error))
     }
 
 
@@ -92,21 +92,21 @@ class ImageDetails extends Component {
         const { albums, selectedAlbum, image } = this.state
         return (
             <div className="image-details">
-                <Card className="image-card"style={{ width: '100%' }}>
+                <Card className="image-card" style={{ width: '100%' }}>
                     <Card.Img src={image?.link} />
                     <Card.Body>
                         <Card.Text>
-                        <strong> Descripción:</strong> {image?.description}
+                            <strong> Descripción:</strong> {image?.description}
                         </Card.Text>
                         <Card.Text>
-                          <strong>  Autor:</strong> {image?.author}
+                            <strong> Autor:</strong> {image?.author}
                         </Card.Text>
                     </Card.Body>
                 </Card>
                 {/*<img src={image?.link} width="100%" />
                 <p> Descripción: {image?.description}</p>
         <p> Autor: {image?.author}</p> */}
-         
+
                 <p>Selecciona un álbum:</p>
                 <select name="selectedAlbum" value={selectedAlbum?.name || ''} onChange={event => this.handleSelectChange(event)}>
                     {albums?.map((elm, index) => {

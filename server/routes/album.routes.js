@@ -5,7 +5,7 @@ const Image = require("../models/Image.model")
 
 
 router.post('/newAlbum', (req, res) => {
-   const album = { ...req.body }
+    const album = { ...req.body }
 
     Album
         .create(album)
@@ -57,43 +57,35 @@ router.put('/addImageToAlbum/:album_id', (req, res) => {
 
     const { albumDetails, image } = req.body
 
-    // let updatePromise = new Promise( resolve => {
+    if (!image._id) {
+        delete image._id
+        image.comments = image.comments.map(comment => comment._id)
+        Image.create(image).then((newImage) => {
 
-        if ( !image._id ) {
-            delete image._id
-            image.comments = image.comments.map( comment => comment._id )
-            Image.create(image).then((newImage) => {
-               
-                const updatedAlbum = replaceUndefinedImageId( newImage._id, albumDetails )
-                updateAlbum( updatedAlbum, newImage._id ).then( () => {
-                    console.log('newImage', newImage._id)
-                    res.json( newImage )
-//                    resolve (newImage)
-                }).catch(err => console.log(err, "falla img"))
-            })
-        }    
-        else {
-            updateAlbum( albumDetails, image._id ).then( () => {
-                res.json( image )
-//                resolve( image )
-            })
-        }
-    // })
+            const updatedAlbum = replaceUndefinedImageId(newImage._id, albumDetails)
+            updateAlbum(updatedAlbum, newImage._id).then(() => {
+                console.log('newImage', newImage._id)
+                res.json(newImage)
 
-    // updatePromise.then(response => res.json(response))
-    //             .catch(err => console.log(err => "falla actualizar album"))
-    //             .catch(err => res.status(500).json({ code: 500, message: 'Error adding image to album', err }))
+            }).catch(err => console.log(err, "falla img"))
+        })
+    }
+    else {
+        updateAlbum(albumDetails, image._id).then(() => {
+            res.json(image)
 
+        })
+    }
 })
 
-function replaceUndefinedImageId( newId, album ) {
-    const nullIdImage = album.images.find( image => !image._id )
+function replaceUndefinedImageId(newId, album) {
+    const nullIdImage = album.images.find(image => !image._id)
     nullIdImage._id = newId
 
     return album
 }
 
-function updateAlbum( album, newImageId ) {
+function updateAlbum(album, newImageId) {
     return Album.findByIdAndUpdate(
         album._id,
         { $push: { images: newImageId } }

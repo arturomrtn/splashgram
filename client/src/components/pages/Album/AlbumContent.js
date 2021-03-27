@@ -9,7 +9,6 @@ class AlbumContent extends Component {
         super()
         this.state = {
             images: [],
-            //user: this.props.storeUser
         }
 
         this.albumService = new AlbumService()
@@ -22,32 +21,32 @@ class AlbumContent extends Component {
         const params = new URLSearchParams(location.search)
 
         this.albumService
-        .getOneAlbum(params.get( 'id' ))
-        .then(response => {
-            this.setState({ images: response.data.images })
-        })
-        .catch(err => console.log(err))
+            .getOneAlbum(params.get('id'))
+            .then(response => {
+                this.setState({ images: response.data.images })
+            })
+            .catch(err => console.log(err))
     }
-    
+
 
     render() {
         return (
             <div className="album-content">
-            {
-                this.state.images.map( image => (
-                    <Link key={image.link} to={`/image-details?id=${image._id}&author=${ image.author }&link=${ image.link }&description=${ image.description }`} className="btn btn-dark"> 
-                        <img 
-                            src= {image.link} 
-                            alt={image.description} 
-                            width="200px"
-                        />
-                        <p>Autor: {image.author}</p>
-                        <p>Descripción: {image.description}</p>
-                        
-                    </Link>
-                ))
-            }
-        </div>
+                {
+                    this.state.images.map(image => (
+                        <Link key={image.link} to={`/image-details?id=${image._id}&author=${image.author}&link=${image.link}&description=${image.description}`} className="btn btn-dark">
+                            <img
+                                src={image.link}
+                                alt={image.description}
+                                width="200px"
+                            />
+                            <p>Autor: {image.author}</p>
+                            <p>Descripción: {image.description}</p>
+
+                        </Link>
+                    ))
+                }
+            </div>
         )
     }
 }

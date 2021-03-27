@@ -12,28 +12,28 @@ class UsersImages extends Component {
         this.imageService = new ImageService()
     }
 
- 
+
     componentDidMount() {
         this.imageService.getAllImages().then(
-            response => this.setState({images: response.data}) 
+            response => this.setState({ images: response.data })
         )
     }
 
 
-    render(){
+    render() {
 
-        const {images} = this.state
+        const { images } = this.state
 
 
-        return(
+        return (
             <div className='unsplash-suggestions'>
                 {
-                    images.map( image => (
-                        <Link to={`/image-details?id=${image._id}&author=${ image.author }&link=${ image.link }&description=${ image.description }`} className="btn btn-dark"> 
-                            <img 
-                                key={image.link} 
-                                src= {image.link} 
-                                alt={image.description} 
+                    images.map(image => (
+                        <Link to={`/image-details?id=${image._id}&author=${image.author}&link=${image.link}&description=${image.description}`} className="btn btn-dark">
+                            <img
+                                key={image.link}
+                                src={image.link}
+                                alt={image.description}
                                 width="250px"
                             />
                         </Link>

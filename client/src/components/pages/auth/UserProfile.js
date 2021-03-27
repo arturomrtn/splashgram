@@ -12,20 +12,20 @@ export default class UserProfile extends Component {
 
         this.authService = new AuthService()
 
-    
+
     }
 
     editBio() {
         this.props.loggedUser.bio = this.state.bio
-        
-       this.authService
-       .updateUser(this.props.loggedUser)
-       .catch( error => console.error('No se ha guardado la bio'))
+
+        this.authService
+            .updateUser(this.props.loggedUser)
+            .catch(error => console.error('No se ha guardado la bio'))
     }
 
-    handleChange( event ) {
+    handleChange(event) {
         this.setState({
-           bio: event.target.value
+            bio: event.target.value
         })
     }
 
@@ -41,8 +41,8 @@ export default class UserProfile extends Component {
                     </Row>
                 </Container>
                 <h2>Mi biografía: </h2>
-                <input value={ this.state.bio } onChange={ event => this.handleChange( event )}/>
-                <button onClick={()=> this.editBio()}>Editar bio</button>
+                <input value={this.state.bio} onChange={event => this.handleChange(event)} />
+                <button onClick={() => this.editBio()}>Editar bio</button>
             </div>
         )
     }

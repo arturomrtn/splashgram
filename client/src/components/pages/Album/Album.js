@@ -10,7 +10,6 @@ class Album extends Component {
         super()
         this.state = {
             albums: [],
-            //user: this.props.storeUser
         }
 
         this.albumService = new AlbumService()
@@ -18,8 +17,8 @@ class Album extends Component {
 
     componentDidMount() {
 
-            this.refreshAlbums()
-    
+        this.refreshAlbums()
+
     }
 
     refreshAlbums() {
@@ -30,7 +29,7 @@ class Album extends Component {
             })
             .catch(err => console.log(err))
     }
-    
+
     deleteAlbum(albumId) {
         this.albumService
             .deleteAlbum(albumId)
@@ -39,15 +38,14 @@ class Album extends Component {
     }
 
     render() {
-        
-        const { albums } = this.state
 
+        const { albums } = this.state
 
         return (
             <div className="my-albums">
                 <h1>Mis álbumes</h1>
-                 <AlbumForm loggedUser={this.props.loggedUser} onNewAlbum={ ()=> this.refreshAlbums()}/>
-                 <AlbumsList albums={this.state.albums} deleteAlbum={(albumId) => this.deleteAlbum(albumId)}/>
+                <AlbumForm loggedUser={this.props.loggedUser} onNewAlbum={() => this.refreshAlbums()} />
+                <AlbumsList albums={this.state.albums} deleteAlbum={(albumId) => this.deleteAlbum(albumId)} />
             </div>
         )
     }

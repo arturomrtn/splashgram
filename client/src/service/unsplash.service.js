@@ -5,43 +5,42 @@ class UnsplashService {
     constructor() {
         this.api = axios.create({
             baseURL: `https://api.unsplash.com/`,
-            headers: { 'Authorization': 'Client-ID ' + 'z-fbopJEY2eBI0pmzST_MAUTG_Pjz68AXG06-A52y2Q' }
+            headers: { 'Authorization': 'Client-ID ' + 'API KEY' }
         })
     }
 
     getRandomImages = () => {
-        return  this.api
-                .get('photos/random?count=15')
-                .then(resp => {
+        return this.api
+            .get('photos/random?count=15')
+            .then(resp => {
 
-                    const linksArray = resp.data.map(image => {
-                        return ({
-                            link: image.urls.regular,
-                            author: image.user.name,
-                            description: image.description
-                        })
+                const linksArray = resp.data.map(image => {
+                    return ({
+                        link: image.urls.regular,
+                        author: image.user.name,
+                        description: image.description
                     })
-                    return linksArray
                 })
-       
+                return linksArray
+            })
+
     }
 
-    searchImages = ( query ) => {
-        return new Promise(resolve => {
-            this.api
-                .get('search/photos?query='+query)
-                .then(resp => {
-                    console.log(resp.data)
-                    const linksArray = resp.data.results.map(image => {
-                        return ({
-                            link: image.urls.regular,
-                            author: image.user.name,
-                            description: image.description
-                        })
+    searchImages = (query) => {
+        return this.api
+            .get('search/photos?query=' + query)
+            .then(resp => {
+                console.log(resp.data)
+                const linksArray = resp.data.results.map(image => {
+                    return ({
+                        link: image.urls.regular,
+                        author: image.user.name,
+                        description: image.description
                     })
-                    resolve(linksArray)
                 })
-        })
+                return (linksArray)
+            })
+
 
     }
 

@@ -5,8 +5,8 @@ const bcrypt = require("bcrypt")
 
 const User = require("../models/user.model")
 
-router.post('/signup', (req, res) =>{
-    const {username, password, lastname, firstname, bio } = req.body
+router.post('/signup', (req, res) => {
+    const { username, password, lastname, firstname, bio } = req.body
 
     if (!username || !password) {
         res.status(400).json({ message: 'Rellena todos los campos' })
@@ -64,9 +64,9 @@ router.post('/logout', (req, res) => {
 router.get('/loggedin', (req, res) => req.isAuthenticated() ? res.status(200).json(req.user) : res.status(403).json({ message: 'No Autorizado' }))
 
 router.get('/getUser/:user_id', (req, res) => {
-  
+
     User
-        .findById(req.params.user_id)   
+        .findById(req.params.user_id)
         .then(user => res.json(user))
         .catch(err => res.status(404).json(err))
 

@@ -34,13 +34,12 @@ export default class App extends Component {
     this.fetchUser()
   }
 
-  render()
-  {
-    return(
-      <div> 
-        <Navigation  storeUser={user => this.storeUser(user)} loggedUser={this.state.loggedUser}/>
+  render() {
+    return (
+      <div>
+        <Navigation storeUser={user => this.storeUser(user)} loggedUser={this.state.loggedUser} />
         <main>
-          <Routes  storeUser={user => this.storeUser(user)} loggedUser={this.state.loggedUser} />
+          <Routes storeUser={user => this.storeUser(user)} loggedUser={this.state.loggedUser} />
         </main>
       </div>
     );

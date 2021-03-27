@@ -13,29 +13,29 @@ class UnsplashSuggestions extends Component {
         this.unsplashService = new UnsplashService()
     }
 
- 
+
     componentDidMount() {
-        
+
         const query = this.getQuery()
 
-        if ( query ) {
-             this.unsplashService
-            .searchImages(query)
-            .then(images => {
-                this.setState({
-                    images: images
+        if (query) {
+            this.unsplashService
+                .searchImages(query)
+                .then(images => {
+                    this.setState({
+                        images: images
+                    })
                 })
-            })
-            
+
         }
         else {
             this.unsplashService
-            .getRandomImages()
-            .then(images => {
-                this.setState({
-                    images: images
+                .getRandomImages()
+                .then(images => {
+                    this.setState({
+                        images: images
+                    })
                 })
-            })
         }
     }
 
@@ -46,20 +46,20 @@ class UnsplashSuggestions extends Component {
         return params.get('queryString')
     }
 
-    render(){
+    render() {
 
-        const {images} = this.state
-        const idUrlParam = image => image._id? `id=${image._id}&` : ''
- 
-        return(
+        const { images } = this.state
+        const idUrlParam = image => image._id ? `id=${image._id}&` : ''
+
+        return (
             <div className='unsplash-suggestions'>
                 {
-                    images.map( image => (
-                        <Link to={`/image-details?${idUrlParam(image)}author=${ image.author }&link=${ image.link }&description=${ image.description }`} className="btn btn-dark"> 
-                            <img 
-                                key={image.link} 
-                                src= {image.link} 
-                                alt={image.description} 
+                    images.map(image => (
+                        <Link to={`/image-details?${idUrlParam(image)}author=${image.author}&link=${image.link}&description=${image.description}`} className="btn btn-dark">
+                            <img
+                                key={image.link}
+                                src={image.link}
+                                alt={image.description}
                                 width="250px"
                             />
                         </Link>

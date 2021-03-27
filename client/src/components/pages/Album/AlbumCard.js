@@ -5,26 +5,25 @@ import PhotoAlbum from '../../../images/photoalbum.png'
 import './AlbumCard.css'
 
 
- const AlbumCard = ({name, description, _id, deleteAlbum}) => {
+const AlbumCard = ({ name, description, _id, deleteAlbum }) => {
+
+    return (
+
+        <Card className="album-card" style={{ width: '18rem' }} key={_id}>
+            <Card.Img src={PhotoAlbum} />
+            <Card.Body>
+                <Card.Title>{name}</Card.Title>
+                <Card.Text>
+                    {description}
+                </Card.Text>
+                <Link to={`myalbums-content/?id=${_id}`} variant="primary">Abrir álbum</Link>
+                <Button onClick={() => deleteAlbum(_id)} className="btn btn-info">Borrar álbum</Button>
+            </Card.Body>
+        </Card>
 
 
-        return (
+    )
 
-                        <Card className="album-card"style={{ width: '18rem' }} key={_id}>
-                            <Card.Img src={PhotoAlbum} />
-                            <Card.Body>
-                                <Card.Title>{name}</Card.Title>
-                                <Card.Text>
-                                    {description}
-                                </Card.Text>
-                                <Link to={`myalbums-content/?id=${_id}`} variant="primary">Abrir álbum</Link>
-                                <Button onClick={() => deleteAlbum(_id)} className="btn btn-info">Borrar álbum</Button>
-                            </Card.Body>
-                        </Card>
-                    
-            
-        )
+}
 
- }
-        
 export default AlbumCard
