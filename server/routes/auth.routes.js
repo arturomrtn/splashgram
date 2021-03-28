@@ -5,7 +5,7 @@ const bcrypt = require("bcrypt")
 
 const User = require("../models/user.model")
 
-router.post('/signup', (req, res) => {
+router.post('/signUp', (req, res) => {
     const { username, password, lastname, firstname, bio } = req.body
 
     if (!username || !password) {
@@ -55,13 +55,13 @@ router.post('/login', (req, res, next) => {
     })(req, res, next)
 })
 
-router.post('/logout', (req, res) => {
+router.post('/logOut', (req, res) => {
     req.logout()
     res.status(200).json({ message: 'Cerró sesión con éxito!' });
 })
 
 
-router.get('/loggedin', (req, res) => req.isAuthenticated() ? res.status(200).json(req.user) : res.status(403).json({ message: 'No Autorizado' }))
+router.get('/loggedIn', (req, res) => req.isAuthenticated() ? res.status(200).json(req.user) : res.status(403).json({ message: 'No Autorizado' }))
 
 router.get('/getUser/:user_id', (req, res) => {
 
@@ -83,7 +83,7 @@ router.put('/updateUser', (req, res) => {
 
 })
 
-router.get('/deleteUser', (req, res) => {
+router.delete('/deleteUser', (req, res) => {
 
 
     User
