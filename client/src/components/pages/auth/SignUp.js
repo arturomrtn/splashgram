@@ -50,7 +50,7 @@ class SignUp extends Component {
                         <hr />
 
                         <Form onSubmit={e => this.handleSubmit(e)}>
-                        <Form.Group>
+                            <Form.Group>
                                 <Form.Label>Firstname</Form.Label>
                                 <Form.Control type="text" name="firstname" value={this.state.firstname} onChange={e => this.handleInputChange(e)} />
                             </Form.Group>

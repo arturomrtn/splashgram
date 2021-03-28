@@ -15,10 +15,10 @@ class UsersImages extends Component {
 
     componentDidMount() {
         this.imageService
-        .getAllImages()
-        .then(
-            response => this.setState({ images: response.data })
-        )
+            .getAllImages()
+            .then(
+                response => this.setState({ images: response.data })
+            )
     }
 
 
