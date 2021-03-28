@@ -2,6 +2,7 @@ const express = require("express")
 const router = express.Router()
 const Album = require("../models/Album.model")
 const Image = require("../models/Image.model")
+const { checkMongoId } = require("../middlewares")
 
 
 router.post('/newAlbum', (req, res) => {

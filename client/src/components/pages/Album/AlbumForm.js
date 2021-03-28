@@ -24,7 +24,6 @@ class AlbumForm extends Component {
     createNewAlbum() {
         this.albumService.createAlbum({
             userId: this.props.loggedUser._id,
-            //|| '604378e1b1e00ba51c9408d1',
             ...this.state
         }).then(() => {
             alert('Se ha creado un nuevo álbum')

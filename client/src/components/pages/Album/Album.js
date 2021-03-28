@@ -4,7 +4,6 @@ import AlbumsList from './AlbumsList'
 import AlbumForm from './AlbumForm'
 import './Album.css'
 
-
 class Album extends Component {
     constructor() {
         super()

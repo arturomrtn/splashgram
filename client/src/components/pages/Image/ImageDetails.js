@@ -4,7 +4,7 @@ import CommentService from '../../../service/comment.service'
 import ImageService from '../../../service/image.service'
 import CommentForm from '../Comment/CommentForm'
 import './ImageDetails.css'
-import { Card } from 'react-bootstrap'
+import { Card, Button } from 'react-bootstrap'
 
 class ImageDetails extends Component {
     constructor() {
@@ -40,25 +40,27 @@ class ImageDetails extends Component {
     }
 
     handleAddToAlbum() {
+
         if (!this.state.selectedAlbum?.images) this.state.selectedAlbum.images = []
         this.state.selectedAlbum.images.push(this.state.image)
-        this.albumService.addImageToAlbum(this.state.selectedAlbum._id, this.state.selectedAlbum, this.state.image).then(resp => {
-            const newImage = resp.data
-            console.log('savedImage', newImage)
-            this.setState(prevState => ({
-                image: { ...prevState.image, _id: newImage._id }
-            }))
-        })
+        this.albumService
+            .addImageToAlbum(this.state.selectedAlbum._id, this.state.selectedAlbum, this.state.image)
+            .then(resp => {
+                const newImage = resp.data
+                this.setState(prevState => ({
+                    image: { ...prevState.image, _id: newImage._id }
+                }))
+            })
     }
 
     setSelectedImage() {
+
         const { location } = this.props
         const params = new URLSearchParams(location.search)
-
         const imageId = params.get('id')
+
         if (imageId) {
             this.imageService.getOneImage(imageId).then(resp => {
-                console.log('selectedImage', resp.data)
                 this.setState({ image: resp.data })
             })
         }
@@ -75,21 +77,23 @@ class ImageDetails extends Component {
     }
 
     addComment(comment) {
-        console.log('new comment', comment, this.state.image)
 
         this.state.image.comments.push(comment)
-        this.commentService.addCommentToImage(this.state.image).then(resp => {
-            const savedImage = resp.data
-            console.log('savedImage', savedImage._id)
-            this.setState(prevState => ({
-                image: { ...prevState.image, _id: savedImage._id }
-            }))
-        }).catch(error => console.error(error))
+        this.commentService
+            .addCommentToImage(this.state.image)
+            .then(resp => {
+                const savedImage = resp.data
+                this.setState(prevState => ({
+                    image: { ...prevState.image, _id: savedImage._id }
+                }))
+            }).catch(error => console.error(error))
     }
 
 
     render() {
+
         const { albums, selectedAlbum, image } = this.state
+
         return (
             <div className="image-details">
                 <Card className="image-card" style={{ width: '100%' }}>
@@ -103,18 +107,17 @@ class ImageDetails extends Component {
                         </Card.Text>
                     </Card.Body>
                 </Card>
-                {/*<img src={image?.link} width="100%" />
-                <p> Descripción: {image?.description}</p>
-        <p> Autor: {image?.author}</p> */}
 
+
+                <CommentForm image={image} loggedUser={this.props.loggedUser} onCreateComment={comment => this.addComment(comment)} />
+                <p>¿Quieres añadir esta imagen a uno de tus álbumes?</p>
                 <p>Selecciona un álbum:</p>
                 <select name="selectedAlbum" value={selectedAlbum?.name || ''} onChange={event => this.handleSelectChange(event)}>
                     {albums?.map((elm, index) => {
                         return <option key={index} value={elm.name}>{elm.name}</option>
                     })}
                 </select>
-                <CommentForm image={image} loggedUser={this.props.loggedUser} onCreateComment={comment => this.addComment(comment)} />
-                <button onClick={() => this.handleAddToAlbum()}>Añadir a un álbum</button>
+                <Button onClick={() => this.handleAddToAlbum()}>Añadir a un álbum</Button>
             </div>
         )
     }

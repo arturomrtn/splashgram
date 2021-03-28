@@ -1,5 +1,7 @@
-import React from 'react'
-import AuthService from '../../../service/auth.service.service'
+import React, { Component } from 'react'
+import AuthService from '../../../service/auth.service'
+import '../Comment/CommentCard.css'
+import { Card } from 'react-bootstrap'
 
 class CommentCard extends Component {
 
@@ -25,12 +27,18 @@ class CommentCard extends Component {
 
 
     render() {
+
         const { comment } = this.props
 
         return (
             <>
-                <p>{comment.body}</p>
-                <p>@{this.state.username}</p>
+                <Card className="comment-card">
+                    <Card.Body>
+                        <p><strong>{comment.body}</strong></p>
+                        <p>Escrito por: <strong>@{this.state.username}</strong></p>
+                    </Card.Body>
+                </Card>
+
             </>
         )
     }

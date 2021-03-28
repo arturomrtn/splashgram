@@ -1,6 +1,7 @@
 import React, { Component } from 'react'
 import '../Comment/CommentForm.css'
-import { Card } from 'react-bootstrap'
+import { Card, Button } from 'react-bootstrap'
+import CommentCard from '../Comment/CommentCard'
 
 class CommentForm extends Component {
     constructor(props) {
@@ -69,11 +70,12 @@ class CommentForm extends Component {
         return (
             <div className="comment">
 
+                <p>¿Te gustaría añadir un comentario a la imagen?</p>
                 <input type="text" name="body" value={this.state.body} onChange={e => this.handleInputChange(e)} />
-                <button onClick={() => this.createComment()}>
+                <Button onClick={() => this.createComment()}>
                     Añadir comentario
-                    </button>
-                <div className="comment-body">
+                    </Button>
+                <div>
                     <strong>Comentarios:</strong>
                     {
                         this.props.image?.comments?.map(comment => (

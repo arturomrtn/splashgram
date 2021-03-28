@@ -1,3 +1,15 @@
 .album-card {
     margin-bottom: 30px;
 }
+
+.album-card button {
+    margin-left: 10px;
+}
+
+.album-card-title {
+    text-align: center;
+}
+
+.album-card-description {
+    text-align: center
+}

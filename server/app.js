@@ -18,4 +18,7 @@ require('./configs/passport.config')(app)
 // Routes index
 require('./routes')(app)
 
+// Error handling
+require('./configs/error-handlers.config')(app)
+
 module.exports = app

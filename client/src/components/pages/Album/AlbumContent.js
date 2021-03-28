@@ -1,7 +1,9 @@
 import React, { Component } from 'react'
 import AlbumService from '../../../service/album.service'
+import ImageService from '../../../service/image.service'
 import { Link } from 'react-router-dom'
 import './AlbumContent.css'
+import { Button } from 'react-bootstrap'
 
 
 class AlbumContent extends Component {
@@ -12,9 +14,16 @@ class AlbumContent extends Component {
         }
 
         this.albumService = new AlbumService()
+        this.imageService = new ImageService()
     }
 
     componentDidMount() {
+
+        this.refreshAlbum()
+
+    }
+
+    refreshAlbum() {
 
         const { location } = this.props
 
@@ -25,6 +34,14 @@ class AlbumContent extends Component {
             .then(response => {
                 this.setState({ images: response.data.images })
             })
+            .catch(err => console.log(err))
+
+    }
+
+    deleteImage(imageId) {
+        this.imageService
+            .deleteImage(imageId)
+            .then(response => this.refreshAlbum())
             .catch(err => console.log(err))
     }
 
@@ -42,8 +59,10 @@ class AlbumContent extends Component {
                             />
                             <p>Autor: {image.author}</p>
                             <p>Descripción: {image.description}</p>
-
+                            <Button onClick={() => this.deleteImage(this.imageId)} className="btn btn-info">Borrar imagen del álbum</Button>
                         </Link>
+
+
                     ))
                 }
             </div>

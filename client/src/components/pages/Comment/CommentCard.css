@@ -1,0 +1,13 @@
+.comment-card {
+    width: auto;
+    margin-top: 10px;
+    margin-bottom: 20px;
+    background-color: grey
+    
+}
+
+.comment-card p {
+    margin-bottom: 10px;
+    text-align: center;
+    margin-top: 20px;
+}
