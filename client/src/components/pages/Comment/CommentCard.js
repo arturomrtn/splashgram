@@ -18,7 +18,8 @@ class CommentCard extends Component {
     }
 
     componentDidMount() {
-        this.authService.getUser(this.props.comment.userId)
+        this.authService
+            .getUser(this.props.comment.userId)
             .then(resp => {
                 const user = resp.data
                 this.setState({ username: user.username })

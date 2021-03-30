@@ -61,6 +61,7 @@ router.post('/addCommentToImage', async (req, res) => {
         console.log('commentId', savedComment._id)
         comment._id = savedComment._id
     }))
+
     await Promise.all(promiseArray).then(() => {
         image.comments = image.comments.map(comment => comment._id)
     })
@@ -73,7 +74,9 @@ router.post('/addCommentToImage', async (req, res) => {
                 console.log('savedImage', savedImage)
                 res.json(savedImage)
             })
+
     } else {
+
         Image.findByIdAndUpdate(image._id, image)
             .then(newImage => res.json(newImage))
     }

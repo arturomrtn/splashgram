@@ -2,6 +2,7 @@ const express = require("express")
 const router = express.Router()
 const passport = require("passport")
 const bcrypt = require("bcrypt")
+const { isLoggedIn } = require("../../server/middlewares/index")
 
 const User = require("../models/user.model")
 
@@ -63,7 +64,7 @@ router.post('/logOut', (req, res) => {
 
 router.get('/loggedIn', (req, res) => req.isAuthenticated() ? res.status(200).json(req.user) : res.status(403).json({ message: 'No Autorizado' }))
 
-router.get('/getUser/:user_id', (req, res) => {
+router.get('/getUser/:user_id', isLoggedIn, (req, res) => {
 
     User
         .findById(req.params.user_id)
@@ -73,7 +74,7 @@ router.get('/getUser/:user_id', (req, res) => {
 })
 
 
-router.put('/updateUser', (req, res) => {
+router.put('/updateUser', isLoggedIn, (req, res) => {
     const user = req.body
 
     User
@@ -83,7 +84,7 @@ router.put('/updateUser', (req, res) => {
 
 })
 
-router.delete('/deleteUser', (req, res) => {
+router.delete('/deleteUser', isLoggedIn, (req, res) => {
 
 
     User
