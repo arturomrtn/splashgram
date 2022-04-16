@@ -6,4 +6,5 @@ module.exports = app => {
     app.use('/api/image', require('./image.routes.js'))
     app.use('/api/album', require('./album.routes.js'))
     app.use('/api/comment', require('./comment.routes.js'))
+    app.use('/api/files', require('./files.routes.js'))
 }
