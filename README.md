@@ -4,8 +4,6 @@ SplashGram es una aplicación de gestión de imágenes donde tras crear un usuar
 
 Pronto se añadirán nuevas funcionalidades y mejoras, como la creación de un avatar para el usuario a través de Cloudinary.
 
-A continuación, 
-
 Endpoints servidor:
 
 | Endpoint | Método | Descripción
