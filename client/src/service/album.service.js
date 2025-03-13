@@ -9,7 +9,6 @@ class AlbumService {
         })
     }
 
-
     getAllAlbums = () => this.api.get('/getAllAlbums')
     getOneAlbum = albumId => this.api.get(`/getOneAlbum/${albumId}`)
     getAlbumsByOwner = userId => this.api.get(`/getAlbumsByOwner/${userId}`)

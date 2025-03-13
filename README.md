@@ -1,28 +1,28 @@
 # SplashGram
 
-SplashGram es una aplicación de gestión de imágenes donde tras crear un usuario e iniciar sesión se pueden crear álbumes a partir de imágenes recibidas a través de llamadas a la API de Unsplash. 
+SplashGram is an image management application that allows you to create albums from images received through Unsplash API calls after creating a user account and logging in. 
 
-Pronto se añadirán nuevas funcionalidades y mejoras, como la creación de un avatar para el usuario a través de Cloudinary.
+New features and improvements will be added soon, such as the creation of a user avatar
 
-Endpoints servidor:
+Endpoints server:
 
-| Endpoint | Método | Descripción
+| Endpoint | Method | Description
 | ------------- | ------------- | ------------
-| /getOneAlbum/:album_id  | GET  | Devuelve información sobre un álbum concreto
-| /newAlbum    |  POST           | Crea un nuevo álbum
-| /getAlbumsByOwner/:user_id | GET | Devuelve todos los álbumes de un usuario
-| /getAllAlbums  | GET  | Devuelve todos los álbumes
-| /addImageToAlbum/:album_id | POST  | Añade una imagen a un álbum concreto
-| /deleteAlbum/:album_id     | DELETE  | Elimina un álbum
-| /signUp | POST | Lleva a cabo el registro del usuario
-| /login  | POST  | Permite iniciar la sesión del usuario
-| /logOut  | POST  | Permite cerrar sesión
-| /loggedIn     |  GET           | Mantiene al usuario con la sesión iniciada
-| /getUser/:user_id | GET | Devuelve toda la información del usuario
-| /updateUser  | PUT  | Actualiza información del usuario
-| /newImage  | POST  | Crea una nueva imagen
-| /getOneImage/:image_id    |  GET           | Nos devuelve información de una imagen concreta
-| /getAllImages | GET | Nos devuelve todas las imágenes
-| /deleteImage/:image_id  | DELETE  | Elimina una imagen
-| /addCommentToImage | POST  | Añade un comentario a una imagen concreta
-| /getAllCommentsFromImage/:image_id     |GET  | Devuelve todos los comentarios de una imagen concreta
+| /getOneAlbum/:album_id  | GET  | Returns information about a specific album
+| /newAlbum    |  POST           | Creates a new album
+| /getAlbumsByOwner/:user_id | GET | Returns all albums an user has
+| /getAllAlbums  | GET  | Returns all albums
+| /addImageToAlbum/:album_id | POST  | Adds an image to a specific album
+| /deleteAlbum/:album_id     | DELETE  | Deletes an album
+| /signUp | POST | Registers the user
+| /login  | POST  | Logs the user in
+| /logOut  | POST  | Logs the user out
+| /loggedIn     |  GET           | Keeps the user logged in
+| /getUser/:user_id | GET | Returns all user information
+| /updateUser  | PUT  | Updates user information
+| /newImage  | POST  | Creates a new image
+| /getOneImage/:image_id    |  GET           | Returns information about a specific image
+| /getAllImages | GET | Returns all images
+| /deleteImage/:image_id  | DELETE  | Deletes an album image
+| /addCommentToImage | POST  | Adds a comment to a specific image
+| /getAllCommentsFromImage/:image_id     |GET  | Returns all comments on a specific image
