@@ -1,8 +1,8 @@
 # SplashGram
 
-SplashGram is an image management application that allows you to create albums from images received through Unsplash API calls after creating a user account and logging in. 
+- SplashGram is an image management application that allows you to create albums from images received through Unsplash API calls after creating a user account and logging in. 
 
-New features and improvements will be added soon, such as the creation of a user avatar
+- New features and improvements will be added soon, such as the creation of a user avatar
 
 Endpoints server:
 
